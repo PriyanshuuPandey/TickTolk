@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tolk India</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Main Container -->
+  <div class="tiktok-app">
+    <!-- Video Sections (Multiple Videos for Swipe Effect) -->
+    <div class="video-container" id="video-container">
+      <video class="video" autoplay muted loop>
+        <source src="video1.mp4" type="video/mp4">
+      </video>
+      <video class="video" muted>
+        <source src="video2.mp4" type="video/mp4">
+      </video>
+      <video class="video" muted>
+        <source src="video3.mp4" type="video/mp4">
+      </video>
+    </div>
+    
+    <!-- Sidebar for Interactions -->
+    <!-- Sidebar for Interactions -->
+<div class="sidebar">
+    <div class="icon like-button">
+      ❤️ <span id="like-count">1.2M</span>
+    </div>
+    <div class="icon">💬 <span>500</span></div>
+    <div class="icon">🔄 <span>100</span></div>
+  </div>
+<!-- Comment Form -->
+<div class="comment-section">
+  <input type="text" id="comment-input" placeholder="Add a comment..." />
+  <button onclick="addComment(videoId)">Post</button>
+</div>
+
+<!-- Video Details -->
+<div class="video-details">
+    <h3>@username</h3>
+    <p>Awesome video caption goes here! #trending #fun</p>
+    <p class="music">🎵 Original Sound - Artist Name</p>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>
