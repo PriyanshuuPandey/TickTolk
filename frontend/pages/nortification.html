@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="notifications"></div>
+
+<script>
+async function fetchNotifications() {
+  const token = localStorage.getItem('token');
+  const response = await fetch('https://your-app.herokuapp.com/api/users/notifications', {
+    headers: { Authorization: token },
+  });
+  const notifications = await response.json();
+
+  document.getElementById('notifications').innerHTML = notifications
+    .map((n) => `<div>${n.message} - ${new Date(n.createdAt).toLocaleString()}</div>`)
+    .join('');
+}
+
+fetchNotifications();
+</script>
+</body>
+</html>

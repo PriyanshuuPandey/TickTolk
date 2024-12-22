@@ -1,0 +1,15 @@
+*{
+    margin: 10;
+    padding: 10;
+    box-sizing: border-box;
+    background-color: black;
+    color: #ffffff;
+    text-align: center;
+    height: 1cm;
+    width: 5cm;
+    align-items: center;
+}
+.div{
+    margin: 10;
+    padding: 10;
+}

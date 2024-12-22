@@ -159,3 +159,22 @@ async function addComment(videoId) {
   const comments = await response.json();
   console.log("Comments:", comments);
 }
+async function followUser(userId) {
+  const token = localStorage.getItem('token');
+  const response = await fetch(`https://your-app-name.herokuapp.com/api/users/${userId}/follow`, {
+    method: 'POST',
+    headers: { 'Authorization': token },
+  });
+  const data = await response.json();
+  alert(data.message);
+}
+
+async function unfollowUser(userId) {
+  const token = localStorage.getItem('token');
+  const response = await fetch(`https://your-app-name.herokuapp.com/api/users/${userId}/unfollow`, {
+    method: 'POST',
+    headers: { 'Authorization': token },
+  });
+  const data = await response.json();
+  alert(data.message);
+}
