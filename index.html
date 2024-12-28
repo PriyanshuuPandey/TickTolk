@@ -6,19 +6,35 @@
     <title>TolkIndia</title>
     <link rel="stylesheet" href="index.css">
 </head>
-<body>
-    <div>
-        <input id="signup-username" placeholder="Username" />
-        <input id="signup-email" placeholder="Email" />
-        <input id="signup-password" type="password" placeholder="Password" />
-        <button onclick="signUp()">Sign Up</button>
-        <!-- Login Form -->
-        <form id="login-form">
-        <input type="text" id="login-username" placeholder="Username">
-        <input type="password" id="login-password" placeholder="Password">
-        <button type="login">Login</button>
-        </form>
-    </div>
+<body background="background.jpeg"> 
+          <div class="signup">
+          <form class="authent-form" action="/api/signup" method="POST">
+            <h2>Signup</h2>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Signup</button>
+          </form>
+        </div>
+        <div class="container">
+          <form class="auth-form" action="/api/login" method="POST">
+            <h2>Login</h2>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Login</button>
+          </form>
+        </div>
       <script>
       async function signUp() {
         const username = document.getElementById('signup-username').value;
@@ -39,5 +55,6 @@
         }
       }
       </script>
+      <script src="auth.js"></script>
 </body>
 </html>

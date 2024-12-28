@@ -1,0 +1,71 @@
+.sidebar img{
+    height: 25px;
+    width: 25px;
+    margin: 10px;
+}
+.modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    width: 90%;
+    max-width: 500px;
+}
+.modal .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.modal .header h2 {
+    margin: 0;
+}
+.modal .comments-list {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-top: 10px;
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+}
+.modal .comment-item {
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: #555;
+    display: flex;
+    flex-direction: column;
+}
+.modal .comment-item .details {
+    display: flex;
+    justify-content: space-between;
+}
+.modal .comment-item .actions {
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.reply-thread {
+    margin-left: 20px;
+    border-left: 2px solid #ccc;
+    padding-left: 10px;
+}
+.modal textarea {
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 14px;
+}
+.modal button {
+    padding: 10px 20px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    background: #007bff;
+    color: #fff;
+}

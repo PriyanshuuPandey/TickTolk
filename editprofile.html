@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Profile</title>
+  <link rel="stylesheet" href="editprofile.css">
+</head>
+<body>
+  <main>
+    <form class="edit-profile-form" id="editProfileForm">
+      <h2>Edit Your Profile</h2>
+      
+      <!-- Avatar Section -->
+      <div class="avatar-container">
+        <label for="avatar">Profile Picture</label>
+        <input type="file" id="avatar" name="avatar" accept="image/*">
+        <div class="avatar-preview">
+          <img id="avatarPreview" src="https://via.placeholder.com/150" alt="Avatar">
+        </div>
+      </div>
+      
+      <!-- Username Section -->
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" placeholder="Enter new username" required>
+      
+      <!-- Bio Section -->
+      <label for="bio">Bio</label>
+      <textarea id="bio" name="bio" placeholder="Write a short bio" rows="4" required></textarea>
+      
+      <div class="form-actions">
+        <button type="submit">Save Changes</button>
+        <button type="button" onclick="resetForm()">Reset</button>
+      </div>
+    </form>
+  </main>
+
+  <script src="editprofile.js"></script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chat</title>
+  <link rel="stylesheet" href="chat.css">
+</head>
+<body>
+  <main class="chat-layout">
+    <div class="chat-sidebar">
+      <div class="chat-header">Chats</div>
+      <div id="chat-list">
+        <div class="chat-item active" data-user="User 1">User 1</div>
+        <div class="chat-item" data-user="User 2">User 2</div>
+      </div>
+      <button id="add-chat-btn">Add Person</button>
+    </div>
+    <div class="chat-window">
+      <div class="chat-header" id="chat-header">User 1</div>
+      <div class="chat-messages" id="chat-messages">
+        <div class="message received">Hello!</div>
+        <div class="message sent">Hi! How are you?</div>
+      </div>
+      <div class="chat-input-container">
+        <input type="text" id="chat-input" placeholder="Type a message...">
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+  </main>
+  <script>
+    const chatList = document.getElementById("chat-list");
+    const chatHeader = document.getElementById("chat-header");
+    const chatMessages = document.getElementById("chat-messages");
+    const chatInput = document.getElementById("chat-input");
+    const sendBtn = document.getElementById("send-btn");
+    const addChatBtn = document.getElementById("add-chat-btn");
+
+    let activeUser = "User 1";
+    const chats = {
+      "User 1": [
+        { type: "received", text: "Hello!" },
+        { type: "sent", text: "Hi! How are you?" }
+      ],
+      "User 2": []
+    };
+
+    const renderMessages = () => {
+      chatMessages.innerHTML = "";
+      chats[activeUser].forEach(msg => {
+        const messageDiv = document.createElement("div");
+        messageDiv.className = `message ${msg.type}`;
+        messageDiv.textContent = msg.text;
+        chatMessages.appendChild(messageDiv);
+      });
+    };
+
+    chatList.addEventListener("click", (e) => {
+      if (e.target.classList.contains("chat-item")) {
+        document.querySelectorAll(".chat-item").forEach(item => item.classList.remove("active"));
+        e.target.classList.add("active");
+        activeUser = e.target.getAttribute("data-user");
+        chatHeader.textContent = activeUser;
+        renderMessages();
+      }
+    });
+
+    sendBtn.addEventListener("click", () => {
+      const messageText = chatInput.value.trim();
+      if (messageText) {
+        chats[activeUser].push({ type: "sent", text: messageText });
+        chatInput.value = "";
+        renderMessages();
+      }
+    });
+
+    addChatBtn.addEventListener("click", () => {
+      const newUserName = prompt("Enter the name of the new chat:");
+      if (newUserName && !chats[newUserName]) {
+        chats[newUserName] = [];
+        const newChatItem = document.createElement("div");
+        newChatItem.className = "chat-item";
+        newChatItem.setAttribute("data-user", newUserName);
+        newChatItem.textContent = newUserName;
+        chatList.appendChild(newChatItem);
+      } else if (chats[newUserName]) {
+        alert("Chat with this user already exists.");
+      }
+    });
+
+    renderMessages();
+  </script>
+</body>
+</html>

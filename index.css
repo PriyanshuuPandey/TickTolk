@@ -1,0 +1,20 @@
+*{
+    margin: 2px;
+    padding: 2px;
+}
+.auth-form {
+    width: 300px;
+    margin: 40px auto;
+    padding: 6px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+  }
+.authent-form{
+    width: 300px;
+    margin: 40px auto;
+    padding: 6px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+}

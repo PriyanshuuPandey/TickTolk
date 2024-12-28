@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TikTok-Style Search</title>
+  <link rel="stylesheet" href="search.css">
+</head>
+<body>
+  <header>
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search User..." />
+      <button id="searchButton">🔍</button>
+    </div>
+    <section id="trending" class="trending-section">
+      <h2>Trending Now</h2>
+      <div id="trendingContainer" class="trending-container"></div>
+    </section>
+    <div id="filters" class="filters">
+      <select id="categoryFilter">
+        <option value="">All Categories</option>
+        <option value="music">Music</option>
+        <option value="comedy">Comedy</option>
+        <option value="education">Education</option>
+      </select>
+      <select id="timeFilter">
+        <option value="">Any Time</option>
+        <option value="day">Last 24 Hours</option>
+        <option value="week">Last Week</option>
+        <option value="month">Last Month</option>
+      </select>
+    </div>
+    <section id="popularUsers" class="popular-users">
+      <h2>Popular Creators</h2>
+      <div id="usersContainer" class="users-container"></div>
+    </section>            
+  </header>
+  <main id="searchResults" class="search-results"></main>
+  <div id="loader" class="loader">Loading...</div>
+  <script src="search.js"></script>
+  <script src="Backend/routes/handler.js"></script>
+</body>
+</html>

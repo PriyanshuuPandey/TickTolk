@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tolk India</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="main.css">
+</head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Watch and share your favorite videos on our TolkIndia platform.">
+  <meta name="keywords" content="videos, social media, short videos, trending, chat">
+  <meta name="author" content="TolkIndia">
+  <meta property="og:title" content="TolkIndia - Share Videos">
+  <meta property="og:description" content="Join our platform to watch and share trending videos.">
+  <meta property="og:image" content="link-to-image.jpg">
+  <meta property="og:url" content="https://tolkindia.com">
+  <title>TolkIndia</title>
+</head>
+<style>
+  body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+  }
+  .footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: #000000;
+      border-top: 1px solid #ccc;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 10px 0;
+      z-index: 1000;
+  }
+  .footer a {
+      text-decoration: none;
+      color: #666;
+      font-size: 14px;
+      text-align: center;
+  }
+  .footer a:hover {
+      color: #000;
+  }
+  .footer img {
+      font-size: 20px;
+      display: block;
+      margin-bottom: 5px;
+      height: 30px;
+      width: 30px;
+  } 
+</style>
+</head>
+<body>
+<div class="footer">
+  <a href="profile.html">
+      <img src="profile.jpeg" alt="Profile">
+      <span>Profile</span>
+  </a>
+</a>
+<a href="search.html">
+    <img src="search.jpeg" alt="Search">
+    <span>Search</span>
+</a>
+<a href="videorecording.html">
+    <img src="videorecording.jpeg" alt="Create">
+    <span>Create</span>
+</a>
+<a href="chat.html">
+    <img src="inbox.jpeg" alt="Chat">
+    <span>Inbox</span>
+</a>
+<a href="postview.html">
+  <img src="post.jpeg" alt="Post">
+  <span>Post</span>
+</div>
+<body>
+  <!-- Main Container -->
+  <div class="tiktok-app">
+    <!-- Video Sections (Multiple Videos for Swipe Effect) -->
+    <div class="video-container" id="video-container">
+      <video class="video" autoplay muted loop>
+        <source src="video1.mp4" type="video/mp4">
+      </video>
+      <video class="video" muted>
+        <source src="video2.mp4" type="video/mp4">
+      </video>
+      <video class="video" muted>
+        <source src="video3.mp4" type="video/mp4">
+      </video>
+    </div>
+    <!-- Sidebar for Interactions -->
+    <!-- Sidebar for Interactions -->
+<div class="sidebar">
+    <div class="icon">
+      ❤️ <span id="like-count">0</span>
+    </div>
+    <div class="icon"><img src="comment.jpeg"><span>0</span></div>
+    <div class="icon"><img src="share.jpeg"> <span>0</span></div>
+  </div>
+<!-- Video Details -->
+<div class="video-details">
+    <h3>@username</h3>
+    <p>Awesome video caption goes here! #trending #fun</p>
+    <p class="music">🎵 Original Sound - Artist Name</p>
+    </div>
+  </div>
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

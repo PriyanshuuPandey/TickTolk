@@ -1,0 +1,92 @@
+*{
+  margin: 5;
+  padding: 5;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #141414;
+  color: white;
+}
+
+.video-recording-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+}
+
+#videoPreview {
+  width: 100%;
+  height: auto;
+  border: 3px solid white;
+  border-radius: 8px;
+  background-color: black;
+}
+
+.controls {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.controls button,
+.button {
+  padding: 10px 20px;
+  background-color: #ff0055;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.controls button:disabled,
+.button:disabled {
+  background-color: #555;
+  cursor: not-allowed;
+}
+
+.editor {
+  margin-top: 20px;
+  text-align: center;
+  width: 100%;
+  max-width: 600px;
+  margin: 5;
+  padding: 5;
+}
+
+.filters {
+  display: flex;
+  justify-content: space-around;
+  margin: 10px 0;
+  margin: 5;
+  padding: 5;
+}
+
+.filter-button {
+  padding: 10px;
+  background-color: #333;
+  border: 1px solid white;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.filter-button:hover {
+  background-color: #444;
+}
+
+.speed-section{
+  margin: 5;
+  padding: 5;
+}
