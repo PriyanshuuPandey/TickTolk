@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buy Gold Coins</title>
+  <link rel="stylesheet" href="purchasecoin.css">
+</head>
+<body>
+  <div class="purchase-container">
+    <h1>Buy Gold Coins</h1>
+
+    <!-- Coin Selector -->
+    <div class="coin-selector">
+      <label for="coinAmount">Select Gold Coins:</label>
+      <select id="coinAmount">
+        <option value="5">5 Coins (🪙1)</option>
+        <option value="10">10 Coins (🪙2)</option>
+        <option value="50">50 Coins (🪙10)</option>
+        <option value="100">100 Coins (🪙20)</option>
+        <option value="500">500 Coins (🪙100)</option>
+      </select>
+    </div>
+
+    <!-- Payment Summary -->
+    <div class="payment-summary">
+      <h3>Summary</h3>
+      <p id="coinSummary">Gold Coins: 5</p>
+      <p id="priceSummary">Total Cost: $1</p>
+    </div>
+
+    <!-- Payment Gateways -->
+    <div class="payment-methods">
+      <h3>Choose Payment Gateway</h3>
+      <div class="gateway-buttons">
+        <button id="paypal" class="gateway-btn">Pay with PayPal</button>
+        <button id="stripe" class="gateway-btn">Pay with Stripe</button>
+        <button id="razorpay" class="gateway-btn">Pay with Razorpay</button>
+        <button id="paytm" class="gateway-btn">Pay with Paytm</button>
+        <button id="gpay" class="gateway-btn">Pay with Google Pay</button>
+        <button id="applepay" class="gateway-btn">Pay with Apple Pay</button>
+        <button id="bank" class="gateway-btn">Direct Bank Transfer</button>
+        <button id="amazonpay" class="gateway-btn">Pay with Amazon Pay</button>
+        <button id="alipay" class="gateway-btn">Pay with Alipay</button>
+        <button id="cryptopay" class="gateway-btn">Pay with Crypto</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="purchasecoin.js"></script>
+  <script src="coin.js"></script>
+</body>
+</html>

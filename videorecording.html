@@ -3,72 +3,63 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Video Recording</title>
+  <title>Video Recording App</title>
   <link rel="stylesheet" href="videorecording.css">
 </head>
 <body>
-  <main class="video-recording-page">
-    <div class="video-container">
-      <!-- Video Preview -->
+  <main class="app-container">
+    <!-- Video Preview Section -->
+    <section class="video-preview">
       <video id="videoPreview" autoplay muted></video>
+      <div class="video-overlay" id="videoOverlay"></div>
+    </section>
 
-      <!-- Video Controls -->
-      <div class="controls">
-        <button id="startRecording">Start Recording</button>
-        <button id="stopRecording" disabled>Stop Recording</button>
-        <button id="applyFilter" disabled>Apply Filter</button>
-        <input type="file" id="uploadSong" accept="audio/*" hidden>
-        <label for="uploadSong" class="button">Add Song</label>
-      </div>
-    </div>
+    <!-- Controls Section -->
+    <section class="controls">
+      <button id="startRecording" class="control-button">🎥</button>
+      <button id="stopRecording" class="control-button" disabled>⏹</button>
+      <input type="file" id="musicFile" accept="audio/*" hidden>
+      <label for="musicFile" class="control-button">🎵</label>
+    </section>
 
-    <div class="editor">
-<div class="music-section">
-  <h3>Add Background Music</h3>
-  <label for="musicFile">Select Music:</label>
-  <input type="file" id="musicFile" accept="audio/*">
-  <button id="mergeMusic">Merge Music</button>
-</div>
-      <!-- Trimming Section -->
-      <div class="trim-section">
-        <label>Start Time:</label>
-        <input type="number" id="trimStart" min="0" step="0.1" value="0">
-        <label>End Time:</label>
-        <input type="number" id="trimEnd" step="0.1">
-        <button id="applyTrim">Trim</button>
-      </div>
+    <!-- Effects Section -->
+    <section class="effects">
+      <h3>Effects</h3>
+      <select id="effectDropdown" class="control-dropdown">
+        <option value="none">None</option>
+        <option value="grayscale(100%)">Grayscale</option>
+        <option value="sepia(100%)">Sepia</option>
+        <option value="blur(5px)">Blur</option>
+        <option value="contrast(150%)">High Contrast</option>
+        <option value="brightness(200%)">Bright</option>
+        <option value="invert(100%)">Invert</option>
+        <option value="saturate(200%)">Saturated</option>
+        <option value="hue-rotate(90deg)">Hue Rotate</option>
+      </select>
+    </section>
 
-      <!-- Text Overlay -->
-      <div class="text-overlay">
-        <label>Add Text:</label>
-        <input type="text" id="overlayText" placeholder="Enter text">
-        <button id="applyTextOverlay">Add Text</button>
-      </div>
+    <!-- Trim Section -->
+    <section class="trim-controls">
+      <h3>Trim Video</h3>
+      <label for="startTime">Start:</label>
+      <input type="number" id="startTime" step="0.1" min="0">
+      <label for="endTime">End:</label>
+      <input type="number" id="endTime" step="0.1" min="0">
+      <button id="trimVideo" class="control-button">✂ Trim</button>
+    </section>
 
-      <!-- Filters -->
-      <div class="filter-section">
-        <h3>Filters</h3>
-        <button data-filter="none">None</button>
-        <button data-filter="grayscale(100%)">Grayscale</button>
-        <button data-filter="sepia(100%)">Sepia</button>
-        <button data-filter="blur(5px)">Blur</button>
-      </div>
+    <!-- Text Overlay Section -->
+    <section class="text-overlay">
+      <h3>Add Text</h3>
+      <input type="text" id="overlayText" placeholder="Enter text..." class="control-input">
+      <button id="applyText" class="control-button">Add Text</button>
+    </section>
 
-      <!-- Speed Control -->
-      <div class="speed-section">
-        <h3>Speed</h3>
-        <button data-speed="0.5">Slow (0.5x)</button>
-        <button data-speed="1">Normal (1x)</button>
-        <button data-speed="2">Fast (2x)</button>
-      </div>
-
-      <!-- Export Button -->
-      <button id="exportVideo">Export Video</button>
-    </div>
-
-      <!-- Upload Video -->
-      <button id="uploadVideo" disabled>Upload Video</button>
-    </div>
+    <!-- Export & Share Section -->
+    <section class="export-share">
+      <button id="exportVideo" class="control-button">💾</button>
+      <button id="shareVideo" class="control-button" disabled>📤</button>
+    </section>
   </main>
 
   <script src="videorecording.js"></script>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Streaming with Super Chat</title>
+  <link rel="stylesheet" href="livestreaming.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Video Stream Section -->
+    <div class="video-section">
+      <video id="liveStream" autoplay muted></video>
+    </div>
+
+    <!-- Chat Section -->
+    <div class="chat-section">
+      <div class="chat-header">
+        <h2>Live Chat</h2>
+      </div>
+      <div class="chat-messages" id="chatMessages"></div>
+
+      <!-- Super Chat Input -->
+      <div class="super-chat">
+        <select id="superChatToken">
+          <option value="dragon">Dragon - $100</option>
+          <option value="rose">Rose - $10</option>
+          <option value="bear">Bear - $50</option>
+          <option value="star">Star - $500</option>
+          <option value="crown">Crown - $1000</option>
+          <option value="phoenix">Phoenix - $200</option>
+          <option value="unicorn">Unicorn - $150</option>
+          <option value="tiger">Tiger - $300</option>
+          <option value="wolf">Wolf - $250</option>
+          <option value="eagle">Eagle - $400</option>
+          <option value="lion">Lion - $500</option>
+          <option value="dolphin">Dolphin - $50</option>
+          <option value="peacock">Peacock - $350</option>
+          <option value="butterfly">Butterfly - $25</option>
+          <option value="flower">Flower - $15</option>
+          <option value="candle">Candle - $30</option>
+          <option value="crownJewels">Crown Jewels - $1000</option>
+          <option value="castle">Castle - $2000</option>
+          <option value="island">Island - $5000</option>
+          <option value="yacht">Yacht - $10000</option>
+          <option value="car">Luxury Car - $20000</option>
+          <option value="plane">Private Plane - $50000</option>
+          <option value="spaceship">Spaceship - $100000</option>
+          <option value="moon">Moon - $150000</option>
+          <option value="galaxy">Galaxy - $200000</option>
+          <option value="diamond">Diamond - $250</option>
+          <option value="ruby">Ruby - $500</option>
+          <option value="emerald">Emerald - $750</option>
+          <option value="sapphire">Sapphire - $1000</option>
+          <option value="goldenThrone">Golden Throne - $5000</option>
+        </select>        
+        <input type="text" id="superChatMessage" placeholder="Type your message..." />
+        <button id="sendSuperChat">Send Super Chat</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="livestreaming.js"></script>
+</body>
+</html>
