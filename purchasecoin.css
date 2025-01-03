@@ -45,7 +45,7 @@ body {
     justify-content: center;
   }
   
-  .gateway-btn {
+  /* .gateway-btn {
     padding: 10px 15px;
     background: #0004ff;
     color: #fff;
@@ -54,7 +54,13 @@ body {
     cursor: pointer;
     font-size: 14px;
   }
-  
+   */
+  .gateway-btn img {
+    width: 55px;
+    height: 30px;
+    place-items: fit;
+  }
+
   .gateway-btn:hover {
     background: #4500b5;
   }
