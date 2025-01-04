@@ -16,7 +16,7 @@ function addChatMessage(message, isSuperChat = false, token = "") {
     chat.style.backgroundColor = token === "dragon" ? "#ff0000" : "#ffd700";
     chat.style.fontWeight = "bold";
     chat.style.color = "#fff";
-    chat.innerHTML = `💎 ${token.toUpperCase()}: ${message}`;
+    chat.innerHTML = `🎁 ${token.toUpperCase()}: ${message}`;
   } else {
     chat.style.backgroundColor = "#fff";
     chat.style.border = "1px solid #ddd";
@@ -43,3 +43,60 @@ sendSuperChatBtn.addEventListener("click", () => {
   // Reset input
   superChatMessage.value = "";
 });
+const leaderboard = {}; // {userId: totalTokens}
+
+const updateLeaderboard = (userId, tokenValue) => {
+  leaderboard[userId] = (leaderboard[userId] || 0) + tokenValue;
+
+  // Render Leaderboard
+  const leaderboardElement = document.getElementById("leaderboard");
+  leaderboardElement.innerHTML = ""; // Clear existing entries
+  Object.entries(leaderboard)
+    .sort(([, a], [, b]) => b - a) // Sort by token value
+    .forEach(([userId, totalTokens]) => {
+      const entry = document.createElement("div");
+      entry.textContent = `${userId}: 🪙${totalTokens}`;
+      leaderboardElement.appendChild(entry);
+    });
+};
+
+// Example Usage
+updateLeaderboard("User123", 100); // Adds 100 tokens for User123
+const tokenValues = {
+  dragon: 100,
+  rose: 10,
+  bear: 50,
+  star: 500,
+  crown: 1000,                   
+  Flower:15,   
+  Butterfly:25,
+  Candle:30,     
+  Bear:50,  
+  Dolphin:50,
+  Dragon:100,
+  Unicorn:150,
+  Phoenix:200,
+  Wolf:250, 
+  Diamond:250,  
+  Tiger:300,  
+  Peacock:350,
+  Eagle:400, 
+  Star:500, 
+  Ruby:500, 
+  Lion:500,  
+  Emerald:750,
+  Crown:1000,  
+  Sapphire:1000, 
+  CrownJewels:1000,
+  Castle:2000,  
+  Island:5000, 
+  GoldenThrone:5000,
+  PrivatePlane:10000,
+  Spaceship:20000,  
+  Yacht:50000,
+  Moon:100000,     
+  LuxuryCar:150000,
+  Galaxy:200000, 
+};
+
+const getTokenValue = (token) => tokenValues[token.toLowerCase()] || 0;
