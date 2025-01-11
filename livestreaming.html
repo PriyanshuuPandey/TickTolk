@@ -4,66 +4,74 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LiveStreaming</title>
+    <link rel="stylesheet" href="livestreaming.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-   <section class="flex-1 p-4">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-     <div class="bg-white p-4 rounded shadow">
-      <img alt="Live stream thumbnail showing a gamer playing a popular video game" class="w-full h-40 object-cover rounded mb-2" src="https://placehold.co/300x200"/>
-      <h3 class="text-md font-bold">
-       Gamer123 playing Fortnite
-      </h3>
-      <p class="text-sm text-gray-600">
-       0 viewers
-      </p>
-     </div>
-     <div class="bg-white p-4 rounded shadow">
-      <img alt="Live stream thumbnail showing a musician playing a guitar" class="w-full h-40 object-cover rounded mb-2" src="https://placehold.co/300x200"/>
-      <h3 class="text-md font-bold">
-       Live Concert by John Doe
-      </h3>
-      <p class="text-sm text-gray-600">
-       0 viewers
-      </p>
-     </div>
-     <div class="bg-white p-4 rounded shadow">
-      <img alt="Live stream thumbnail showing a football match" class="w-full h-40 object-cover rounded mb-2" src="https://placehold.co/300x200"/>
-      <h3 class="text-md font-bold">
-       Live Football Match
-      </h3>
-      <p class="text-sm text-gray-600">
-       0 viewers
-      </p>
-     </div>
-     <div class="bg-white p-4 rounded shadow">
-      <img alt="Live stream thumbnail showing a news anchor reporting live" class="w-full h-40 object-cover rounded mb-2" src="https://placehold.co/300x200"/>
-      <h3 class="text-md font-bold">
-       Breaking News
-      </h3>
-      <p class="text-sm text-gray-600">
-       0 viewers
-      </p>
-     </div>
-     <div class="bg-white p-4 rounded shadow">
-      <img alt="Live stream thumbnail showing a teacher giving an online lecture" class="w-full h-40 object-cover rounded mb-2" src="https://placehold.co/300x200"/>
-      <h3 class="text-md font-bold">
-       Math Lecture by Prof. Smith
-      </h3>
-      <p class="text-sm text-gray-600">
-       0 viewers
-      </p>
-     </div>
-     <div class="bg-white p-4 rounded shadow">
-      <img alt="Live stream thumbnail showing a comedian performing stand-up comedy" class="w-full h-40 object-cover rounded mb-2" src="https://placehold.co/300x200"/>
-      <h3 class="text-md font-bold">
-       Stand-up Comedy Show
-      </h3>
-      <p class="text-sm text-gray-600">
-       0 viewers
-      </p>
-     </div>
-    </div>
-   </section>
-  </main>
+<body class="bg-gray-100">
+    <!-- Header Section -->
+    <header class="bg-blue-600 text-white p-4 shadow">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold">LiveStreaming</h1>
+            <button class="bg-white text-blue-600 px-4 py-2 rounded hover:bg-blue-100 transition" id="goLive">
+                Go Live
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="p-4">
+        <div class="container mx-auto">
+            <!-- Search Bar -->
+            <div class="mb-6 flex justify-center">
+                <input 
+                    type="text" 
+                    placeholder="Search live streams..." 
+                    class="w-full max-w-md p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-300"
+                    id="searchBar"
+                />
+            </div>
+
+            <!-- Live Streams Grid -->
+            <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Stream Card Example -->
+                <div class="bg-white p-4 rounded shadow hover:shadow-lg transition group relative overflow-hidden">
+                    <img 
+                        alt="Gamer playing Fortnite" 
+                        class="w-full h-40 object-cover rounded mb-2 transform group-hover:scale-105 transition" 
+                        src="https://placehold.co/300x200"
+                    />
+                    <h3 class="text-lg font-bold">Gamer123 playing Fortnite</h3>
+                    <p class="text-sm text-gray-600 mb-4" id="viewerCount1">0 viewers</p>
+                    <button class="absolute bottom-4 right-4 bg-blue-600 text-white px-3 py-1 text-sm rounded shadow hover:bg-blue-700 transition">
+                        Watch Now
+                    </button>
+                </div>
+
+                <!-- More Cards -->
+                <div class="bg-white p-4 rounded shadow hover:shadow-lg transition group relative overflow-hidden">
+                    <img 
+                        alt="Musician playing guitar" 
+                        class="w-full h-40 object-cover rounded mb-2 transform group-hover:scale-105 transition" 
+                        src="https://placehold.co/300x200"
+                    />
+                    <h3 class="text-lg font-bold">Live Concert by John Doe</h3>
+                    <p class="text-sm text-gray-600 mb-4" id="viewerCount2">0 viewers</p>
+                    <button class="absolute bottom-4 right-4 bg-blue-600 text-white px-3 py-1 text-sm rounded shadow hover:bg-blue-700 transition">
+                        Watch Now
+                    </button>
+                </div>
+                <!-- Additional cards go here -->
+            </section>
+        </div>
+    </main>
+
+    <!-- Floating Action Button -->
+    <button 
+        class="fixed bottom-6 right-6 bg-blue-600 text-white px-4 py-2 rounded-full shadow-lg hover:bg-blue-700 transition focus:outline-none"
+        id="floatingActionButton">
+        +
+    </button>
+
+    <script src="livestreaming.js"></script>
 </body>
 </html>
