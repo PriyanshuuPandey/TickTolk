@@ -36,13 +36,94 @@
                 <!-- Stream cards will be injected here -->
             </section>
         </div>
+            <div class="w-full md:w-3/4 bg-black relative">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/m8zcXLU6HFU?si=k6PXgOQVyQ3r20he" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <div class="absolute bottom-4 left-4 text-white">
+                    <h1 class="text-2xl font-bold">Live Streaming</h1>
+                    <p class="text-lg">Join the live chat and interact with the community!</p>
+                </div>
+                <div class="absolute top-4 left-4 text-white">
+                    <span id="viewerCount" class="bg-red-500 px-4 py-2 rounded">
+                        0 Viewers
+                    </span>
+                </div>
+            </div>
+            <div class="w-full md:w-3/4 bg-black relative">
+                <iframe width="360" height="315" src="https://www.youtube.com/embed/EvR6WRiEgVk?si=tP7-uQfSYj7_SA4a" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <div class="absolute bottom-4 left-4 text-white">
+                    <h1 class="text-2xl font-bold">Live Streaming</h1>
+                    <p class="text-lg">Join the live chat and interact with the community!</p>
+                </div>
+                <div class="absolute top-4 left-4 text-white">
+                    <span id="viewerCount" class="bg-red-500 px-4 py-2 rounded">
+                        0 Viewers
+                    </span>
+                </div>
+            </div>
+            <div class="w-full md:w-3/4 bg-black relative">
+              <iframe width="360" height="315" src="https://www.youtube.com/embed/1pb07XF5XD8?si=x8Sh9Q8DSMZbFvH5" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              <div class="absolute bottom-4 left-4 text-white">
+                  <h1 class="text-2xl font-bold">Live Streaming</h1>
+                  <p class="text-lg">Join the live chat and interact with the community!</p>
+              </div>
+              <div class="absolute top-4 left-4 text-white">
+                  <span id="viewerCount" class="bg-red-500 px-4 py-2 rounded">
+                      0 Viewers
+                  </span>
+              </div>
+          </div>
     </main>
-    <!-- Floating Action Button -->
-    <button 
-        class="fixed bottom-6 right-6 bg-blue-600 text-white px-4 py-2 rounded-full shadow-lg hover:bg-blue-700 transition focus:outline-none"
-        id="floatingActionButton">
-        +
-    </button>
+    <!-- Go Live Modal -->
+    <div id="goLiveModal" class="fixed inset-0 bg-gray-800 bg-opacity-50 hidden flex items-center justify-center">
+        <div class="bg-white p-6 rounded shadow-lg w-full max-w-md">
+            <h2 class="text-lg font-bold mb-4">Go Live</h2>
+            <form id="goLiveForm">
+                <div class="mb-4">
+                    <label class="block text-sm font-bold mb-2">Stream Title</label>
+                    <input 
+                        type="text" 
+                        id="streamTitle" 
+                        class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-300"
+                        placeholder="Enter your stream title"
+                        required
+                    />
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-bold mb-2">Category</label>
+                    <input 
+                        type="text" 
+                        id="streamCategory" 
+                        class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-300"
+                        placeholder="Enter your category"
+                        required
+                    />
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-bold mb-2">Thumbnail URL</label>
+                    <input 
+                        type="url" 
+                        id="streamThumbnail" 
+                        class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-300"
+                        placeholder="Paste a thumbnail URL"
+                        required
+                    />
+                </div>
+                <div class="flex justify-end">
+                    <button 
+                        type="button" 
+                        class="bg-gray-300 text-gray-700 px-4 py-2 rounded mr-2 hover:bg-gray-400"
+                        id="cancelGoLive">
+                        Cancel
+                    </button>
+                    <button 
+                        type="submit" 
+                        class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                        Start Stream
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
     <script src="livestreaming.js"></script>
 </body>
 </html>
