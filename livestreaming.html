@@ -17,7 +17,6 @@
             </button>
         </div>
     </header>
-
     <!-- Main Content -->
     <main class="p-4">
         <div class="container mx-auto">
@@ -30,48 +29,20 @@
                     id="searchBar"
                 />
             </div>
-
             <!-- Live Streams Grid -->
-            <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Stream Card Example -->
-                <div class="bg-white p-4 rounded shadow hover:shadow-lg transition group relative overflow-hidden">
-                    <img 
-                        alt="Gamer playing Fortnite" 
-                        class="w-full h-40 object-cover rounded mb-2 transform group-hover:scale-105 transition" 
-                        src="https://placehold.co/300x200"
-                    />
-                    <h3 class="text-lg font-bold">Gamer123 playing Fortnite</h3>
-                    <p class="text-sm text-gray-600 mb-4" id="viewerCount1">0 viewers</p>
-                    <button class="absolute bottom-4 right-4 bg-blue-600 text-white px-3 py-1 text-sm rounded shadow hover:bg-blue-700 transition">
-                        Watch Now
-                    </button>
-                </div>
-
-                <!-- More Cards -->
-                <div class="bg-white p-4 rounded shadow hover:shadow-lg transition group relative overflow-hidden">
-                    <img 
-                        alt="Musician playing guitar" 
-                        class="w-full h-40 object-cover rounded mb-2 transform group-hover:scale-105 transition" 
-                        src="https://placehold.co/300x200"
-                    />
-                    <h3 class="text-lg font-bold">Live Concert by John Doe</h3>
-                    <p class="text-sm text-gray-600 mb-4" id="viewerCount2">0 viewers</p>
-                    <button class="absolute bottom-4 right-4 bg-blue-600 text-white px-3 py-1 text-sm rounded shadow hover:bg-blue-700 transition">
-                        Watch Now
-                    </button>
-                </div>
-                <!-- Additional cards go here -->
+            <section 
+                class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" 
+                id="liveStreamsGrid">
+                <!-- Stream cards will be injected here -->
             </section>
         </div>
     </main>
-
     <!-- Floating Action Button -->
     <button 
         class="fixed bottom-6 right-6 bg-blue-600 text-white px-4 py-2 rounded-full shadow-lg hover:bg-blue-700 transition focus:outline-none"
         id="floatingActionButton">
         +
     </button>
-
     <script src="livestreaming.js"></script>
 </body>
 </html>
