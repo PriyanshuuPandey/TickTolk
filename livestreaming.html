@@ -1,129 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LiveStreaming</title>
-    <link rel="stylesheet" href="livestreaming.css">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>Live Streaming</title>
+    <link rel="stylesheet" href="main.css">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100">
-    <!-- Header Section -->
+<!-- <style>
+    *{
+        background: black;
+    }
+</style> -->
+<body class="bg-black-100 font-roboto">
     <header class="bg-blue-600 text-white p-4 shadow">
         <div class="container mx-auto flex justify-between items-center">
             <h1 class="text-xl font-bold">LiveStreaming</h1>
             <button class="bg-white text-blue-600 px-4 py-2 rounded hover:bg-blue-100 transition" id="goLive">
                 Go Live
             </button>
-        </div>
-    </header>
-    <!-- Main Content -->
-    <main class="p-4">
-        <div class="container mx-auto">
-            <!-- Search Bar -->
-            <div class="mb-6 flex justify-center">
-                <input 
-                    type="text" 
-                    placeholder="Search live streams..." 
-                    class="w-full max-w-md p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-300"
-                    id="searchBar"
-                />
+        </header>
+        <!-- Live Streams Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Example Stream Card -->
+            <div class="bg-white p-4 rounded shadow hover:shadow-lg transition">
+                <iframe width="330" height="255" src="https://www.youtube.com/embed/CgjCmtTWyFA?si=RjSFed4U2eIBffXy" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <h3 class="text-xl font-bold mb-2">Sad music</h3>
+                <p class="text-gray-600 mb-4">Experience the thrill of live music!</p>
+                <span id="viewerCount1" class="bg-red-500 text-white px-3 py-1 rounded">
+                    0 Viewers
+                </span>
             </div>
-            <!-- Live Streams Grid -->
-            <section 
-                class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" 
-                id="liveStreamsGrid">
-                <!-- Stream cards will be injected here -->
-            </section>
-        </div>
-            <div class="w-full md:w-3/4 bg-black relative">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/m8zcXLU6HFU?si=k6PXgOQVyQ3r20he" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                <div class="absolute bottom-4 left-4 text-white">
-                    <h1 class="text-2xl font-bold">Live Streaming</h1>
-                    <p class="text-lg">Join the live chat and interact with the community!</p>
-                </div>
-                <div class="absolute top-4 left-4 text-white">
-                    <span id="viewerCount" class="bg-red-500 px-4 py-2 rounded">
-                        0 Viewers
-                    </span>
-                </div>
+
+            <!-- Another Stream Card -->
+            <div class="bg-white p-4 rounded shadow hover:shadow-lg transition">
+                <iframe width="330" height="255" src="https://www.youtube.com/embed/tHPwJNwY1R4?si=EJD3U0WZ9kOvGhcS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <h3 class="text-xl font-bold mb-2">Live Concert by John Doe</h3>
+                <p class="text-gray-600 mb-4">Join the magic of live music performances.</p>
+                <span id="viewerCount2" class="bg-red-500 text-white px-3 py-1 rounded">
+                    0 Viewers
+                </span>
             </div>
-            <div class="w-full md:w-3/4 bg-black relative">
-                <iframe width="360" height="315" src="https://www.youtube.com/embed/EvR6WRiEgVk?si=tP7-uQfSYj7_SA4a" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                <div class="absolute bottom-4 left-4 text-white">
-                    <h1 class="text-2xl font-bold">Live Streaming</h1>
-                    <p class="text-lg">Join the live chat and interact with the community!</p>
-                </div>
-                <div class="absolute top-4 left-4 text-white">
-                    <span id="viewerCount" class="bg-red-500 px-4 py-2 rounded">
-                        0 Viewers
-                    </span>
-                </div>
+
+            <div class="bg-white p-4 rounded shadow hover:shadow-lg transition">
+                <iframe width="330" height="255" src="https://www.youtube.com/embed/tHPwJNwY1R4?si=EJD3U0WZ9kOvGhcS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <h3 class="text-xl font-bold mb-2">Live Concert by John Doe</h3>
+                <p class="text-gray-600 mb-4">Join the magic of live music performances.</p>
+                <span id="viewerCount2" class="bg-red-500 text-white px-3 py-1 rounded">
+                    0 Viewers
+                </span>
+            </div> 
+
+            <div class="bg-white p-4 rounded shadow hover:shadow-lg transition">
+                <iframe width="330" height="255" src="https://www.youtube.com/embed/xRPjKQtRXR8?si=kvSDyxE5B45tWOM4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <h3 class="text-xl font-bold mb-2">Gamer123 Playing Fortnite</h3>
+            <p class="text-gray-600 mb-4">Experience the thrill of live gaming!</p>
+            <span id="viewerCount1" class="bg-red-500 text-white px-3 py-1 rounded">
+                0 Viewers
+            </span>
             </div>
-            <div class="w-full md:w-3/4 bg-black relative">
-              <iframe width="360" height="315" src="https://www.youtube.com/embed/1pb07XF5XD8?si=x8Sh9Q8DSMZbFvH5" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-              <div class="absolute bottom-4 left-4 text-white">
-                  <h1 class="text-2xl font-bold">Live Streaming</h1>
-                  <p class="text-lg">Join the live chat and interact with the community!</p>
-              </div>
-              <div class="absolute top-4 left-4 text-white">
-                  <span id="viewerCount" class="bg-red-500 px-4 py-2 rounded">
-                      0 Viewers
-                  </span>
-              </div>
-          </div>
-    </main>
-    <!-- Go Live Modal -->
-    <div id="goLiveModal" class="fixed inset-0 bg-gray-800 bg-opacity-50 hidden flex items-center justify-center">
-        <div class="bg-white p-6 rounded shadow-lg w-full max-w-md">
-            <h2 class="text-lg font-bold mb-4">Go Live</h2>
-            <form id="goLiveForm">
-                <div class="mb-4">
-                    <label class="block text-sm font-bold mb-2">Stream Title</label>
-                    <input 
-                        type="text" 
-                        id="streamTitle" 
-                        class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-300"
-                        placeholder="Enter your stream title"
-                        required
-                    />
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-bold mb-2">Category</label>
-                    <input 
-                        type="text" 
-                        id="streamCategory" 
-                        class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-300"
-                        placeholder="Enter your category"
-                        required
-                    />
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-bold mb-2">Thumbnail URL</label>
-                    <input 
-                        type="url" 
-                        id="streamThumbnail" 
-                        class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-300"
-                        placeholder="Paste a thumbnail URL"
-                        required
-                    />
-                </div>
-                <div class="flex justify-end">
-                    <button 
-                        type="button" 
-                        class="bg-gray-300 text-gray-700 px-4 py-2 rounded mr-2 hover:bg-gray-400"
-                        id="cancelGoLive">
-                        Cancel
-                    </button>
-                    <button 
-                        type="submit" 
-                        class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
-                        Start Stream
-                    </button>
-                </div>
-            </form>
+
+            <div class="bg-white p-4 rounded shadow hover:shadow-lg transition">
+                <iframe width="330" height="255" src="https://www.youtube.com/embed/xRPjKQtRXR8?si=kvSDyxE5B45tWOM4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <h3 class="text-xl font-bold mb-2">Gamer123 Playing Fortnite</h3>
+            <p class="text-gray-600 mb-4">Experience the thrill of live gaming!</p>
+            <span id="viewerCount1" class="bg-red-500 text-white px-3 py-1 rounded">
+                0 Viewers
+            </span>
+            </div>
+
+            <div class="bg-white p-4 rounded shadow hover:shadow-lg transition">
+                <iframe width="330" height="255" src="https://www.youtube.com/embed/bpYNvSIK96c?si=IFucuDD3qbqBUGYM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <h3 class="text-xl font-bold mb-2">Gamer123 Playing Fortnite</h3>
+            <p class="text-gray-600 mb-4">Experience the thrill of live gaming!</p>
+            <span id="viewerCount1" class="bg-red-500 text-white px-3 py-1 rounded">
+                 0 Viewers
+            </span>
+            </div>
+
+            <div class="bg-white p-4 rounded shadow hover:shadow-lg transition">
+                <iframe width="330" height="255" src="https://www.youtube.com/embed/bpYNvSIK96c?si=IFucuDD3qbqBUGYM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <h3 class="text-xl font-bold mb-2">Gamer123 Playing Fortnite</h3>
+            <p class="text-gray-600 mb-4">Experience the thrill of live gaming!</p>
+            <span id="viewerCount1" class="bg-red-500 text-white px-3 py-1 rounded">
+                 0 Viewers
+            </span>
+            </div>
+
+            <div class="bg-white p-4 rounded shadow hover:shadow-lg transition">
+                <iframe width="330" height="255" src="https://www.youtube.com/embed/619RN1GLF5Y?si=LB7gxtr3tgZlReXi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <h3 class="text-xl font-bold mb-2">Gamer123 Playing Fortnite</h3>
+            <p class="text-gray-600 mb-4">Experience the thrill of live gaming!</p>
+            <span id="viewerCount1" class="bg-red-500 text-white px-3 py-1 rounded">
+                0 Viewers
+            </span>
+            </div>
+
+            <div class="bg-white p-4 rounded shadow hover:shadow-lg transition">
+                <iframe width="330" height="255" src="https://www.youtube.com/embed/619RN1GLF5Y?si=LB7gxtr3tgZlReXi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <h3 class="text-xl font-bold mb-2">Gamer123 Playing Fortnite</h3>
+            <p class="text-gray-600 mb-4">Experience the thrill of live gaming!</p>
+            <span id="viewerCount1" class="bg-red-500 text-white px-3 py-1 rounded">
+                0 Viewers
+            </span>
+            </div>
+
+            <div class="bg-white p-4 rounded shadow hover:shadow-lg transition">
+                <iframe width="330" height="255" src="https://www.youtube.com/embed/JGc6NXmOHpA?si=qEUvf79Un07k2YCa" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <h3 class="text-xl font-bold mb-2">Gamer123 Playing Fortnite</h3>
+            <p class="text-gray-600 mb-4">Experience the thrill of live gaming!</p>
+            <span id="viewerCount1" class="bg-red-500 text-white px-3 py-1 rounded">
+                0 Viewers
+            </span>
+            </div>
+
+            <div class="bg-white p-4 rounded shadow hover:shadow-lg transition">
+                <iframe width="330" height="255" src="https://www.youtube.com/embed/3DSq4xfqrlI?si=8qwG1-_YJ1CBzi2g" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>                <h3 class="text-xl font-bold mb-2">Gamer123 Playing Fortnite</h3>
+            <p class="text-gray-600 mb-4">Experience the thrill of live gaming!</p>
+            <span id="viewerCount1" class="bg-red-500 text-white px-3 py-1 rounded">
+                0 Viewers
+            </span>
+            </div>
+            <!-- Add More Stream Cards -->
         </div>
     </div>
-    <script src="livestreaming.js"></script>
+    
+    <script>
+        // Viewer Count Elements
+        const viewerCountElements = [
+            document.getElementById('viewerCount1'),
+            document.getElementById('viewerCount2'),
+            document.getElementById('viewerCount3'),
+            document.getElementById('viewerCount4'),
+            document.getElementById('viewerCount5'),
+            document.getElementById('viewerCount6'),
+            document.getElementById('viewerCount7'),
+            document.getElementById('viewerCount8')
+            // Add more elements as needed for additional streams
+        ];
+
+        // Viewer Count State
+        let viewerCounts = viewerCountElements.map(() => Math.floor(Math.random() * 50) + 50); // Initialize with random counts
+        let streamStartTime = Date.now();
+
+        // Viewer Count Update Logic
+        function updateViewerCounts() {
+            const elapsedMinutes = Math.floor((Date.now() - streamStartTime) / 60000);
+
+            viewerCounts = viewerCounts.map((count, index) => {
+                if (elapsedMinutes < 5) {
+                    // Initial boost phase
+                    count += Math.floor(Math.random() * 20) + 10;
+                } else if (elapsedMinutes < 30) {
+                    // Steady growth phase
+                    count += Math.floor(Math.random() * 10) - 2;
+                } else {
+                    // Random fluctuations
+                    count += Math.floor(Math.random() * 15) - 7;
+                }
+
+                return Math.max(0, count); // Ensure non-negative counts
+            });
+
+            // Update the UI
+            viewerCountElements.forEach((el, index) => {
+                el.textContent = `${viewerCounts[index]} Viewers`;
+            });
+
+            // Schedule the next update
+            setTimeout(updateViewerCounts, 3000);
+        }
+
+        // Start the viewer count updates
+        updateViewerCounts();
+    </script>
 </body>
 </html>
