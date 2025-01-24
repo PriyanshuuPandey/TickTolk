@@ -7,56 +7,459 @@
   <link rel="stylesheet" href="stream.css">
 </head>
 <body>
-  <div class="container">
-    <!-- Video Stream Section -->
-    <div class="video-section">
-      <video id="liveStream" autoplay muted></video>
-    </div>
-    <!-- Chat Section -->
-    <div class="chat-section">
-      <div class="chat-header">
-        <h2>Live Chat</h2>
+<!-- Video Player Section -->
+  <div id="video-container">
+      <video id="livestream" autoplay muted></video>
+      <div class="controls">
+          <button id="start-stream">Start Stream</button>
+          <button id="stop-stream">Stop Stream</button>
       </div>
-      <div class="chat-messages" id="chatMessages"></div>
-      <!-- Super Chat Input -->
-      <div class="super-chat">
-        <select id="superChatToken">
-          <option value="rose">         🪙10      -  Rose              </option>
-          <option value="flower">       🪙15      -  Flower            </option>
-          <option value="butterfly">    🪙25      -  Butterfly         </option>
-          <option value="candle">       🪙30      -  Candle            </option>
-          <option value="bear">         🪙50      -  Bear              </option>
-          <option value="dolphin">      🪙50      -  Dolphin           </option>
-          <option value="dragon">       🪙100     -  Dragon            </option>
-          <option value="unicorn">      🪙150     -  Unicorn           </option>
-          <option value="phoenix">      🪙200     -  Phoenix           </option>
-          <option value="wolf">         🪙250     -  Wolf              </option>
-          <option value="diamond">      🪙250     -  Diamond           </option>
-          <option value="tiger">        🪙300     -  Tiger             </option>
-          <option value="peacock">      🪙350     -  Peacock           </option>
-          <option value="eagle">        🪙400     -  Eagle             </option>
-          <option value="star">         🪙500     -  Star              </option>
-          <option value="ruby">         🪙500     -  Ruby              </option>
-          <option value="lion">         🪙500     -  Lion              </option>
-          <option value="emerald">      🪙750     -  Emerald           </option>
-          <option value="crown">        🪙1000    -  Crown             </option>
-          <option value="sapphire">     🪙1000    -  Sapphire          </option>
-          <option value="crownJewels">  🪙1000    -  Crown Jewels      </option>
-          <option value="castle">       🪙2000    -  Castle            </option>
-          <option value="island">       🪙5000    -  Island            </option>
-          <option value="goldenThrone"> 🪙5000    -  Golden Throne     </option>
-          <option value="yacht">        🪙10000   -  Yacht             </option>
-          <option value="car">          🪙20000   -  Luxury Car        </option>
-          <option value="plane">        🪙50000   -  Private Plane     </option>
-          <option value="spaceship">    🪙100000  -  Spaceship         </option>
-          <option value="moon">         🪙150000  -  Moon              </option>
-          <option value="galaxy">       🪙200000  -  Galaxy            </option>
-        </select>        
-        <input type="text" id="superChatMessage" placeholder="Type your message..." />
-        <button id="sendSuperChat">Send</button>
-      </div>
-    </div>
+      <div id="viewer-count">Viewers: <span id="viewer-number">0</span></div>
   </div>
+
+  <!-- Chat Section -->
+  <div id="chat-container">
+      <div id="messages"></div>
+      <form id="chat-form">
+          <input type="text" id="chat-input" placeholder="Type your message..." required>
+          <button type="submit" id="send-button">Send</button>
+      </form>
+  </div>
+
+  <!-- Gift Section -->
+  <div id="gift-container" class="relative p-4 border rounded-lg">
+        <h2 class="text-lg font-bold mb-3">Send a Gift</h2>
+        <div class="gift-container grid grid-cols-2 gap-4">
+            <select id="gift-select" class="block w-full p-2 border rounded-lg text-gray-700 bg-white">
+              <option value="rose"        data-cost="10">        🌹  Rose        - 🪙10  </option>
+              <option value="bouquet"     data-cost="50">        💐  Bouquet     - 🪙50  </option>
+              <option value="diamond"     data-cost="100">       💎  Diamond     - 🪙100 </option>
+              <option value="phoenix"     data-cost="150">       🔥  Phoenix     - 🪙150 </option>
+              <option value="butterfly"   data-cost="200">       🦋  Butterfly   - 🪙200 </option>
+              <option value="crown"       data-cost="250">       👑  Crown       - 🪙250 </option>
+              <option value="castle"      data-cost="300">       🏰  Castle      - 🪙300 </option>
+              <option value="luxury-car"  data-cost="350">       🚗  Luxury Car  - 🪙350 </option>
+              <option value="private-jet" data-cost="400">       ✈️  Private Jet - 🪙400 </option>
+              <option value="galaxy"      data-cost="500">       🌌  Galaxy      - 🪙500 </option>
+          </select>
+          <div class="mt-4">
+              <button id="send-gift-button" class="bg-blue-500 text-white p-2 mt-2 rounded-lg w-full disabled:bg-gray-400" disabled>
+                Send Gift
+              </button>
+          </div>
+      </div>
+  </div>
+
+  <!-- Super Chat Section -->
+  <div class="super-chat">
+      <input
+          id="super-chat-amount"
+          type="number"
+          placeholder="Enter Amount (INR)"
+          min="1"
+          step="1"
+          oninput="this.value = this.value.replace(/[^0-9]/g, '');"
+      />
+      <button id="send-super-chat">SuperChat</button>
+  </div>
+    
+  <script>
+    const video = document.getElementById('livestream');
+    const startStreamButton = document.getElementById('start-stream');
+    const stopStreamButton = document.getElementById('stop-stream');
+    const messagesDiv = document.getElementById('messages');
+    const chatForm = document.getElementById('chat-form');
+    const chatInput = document.getElementById('chat-input');
+    const viewerNumber = document.getElementById('viewer-number');
+    const superChatForm = document.getElementById('super-chat-form');
+    const superChatInput = document.getElementById('super-chat-input');
+    const superChatsDiv = document.getElementById('super-chats');
+    const giftContainer = document.querySelector('.gift-container');
+
+    let mediaStream = null;
+    let viewers = 0;
+
+    async function startStream() {
+        try {
+            mediaStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+            video.srcObject = mediaStream;
+            viewers = Math.floor(Math.random() * 100) + 1; // Simulating viewer count
+            viewerNumber.textContent = viewers;
+          } catch (err) {
+            alert('Error accessing camera or microphone: ' + err.message);
+          }
+      }
+
+    function stopStream() {
+        if (mediaStream) {
+          mediaStream.getTracks().forEach(track => track.stop());
+          video.srcObject = null;
+          viewers = 0;
+          viewerNumber.textContent = viewers;
+        }
+    }
+
+    startStreamButton.addEventListener('click', startStream);
+    stopStreamButton.addEventListener('click', stopStream);
+
+    chatForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const message = chatInput.value;
+        const messageDiv = document.createElement('div');
+        messageDiv.textContent = `You: ${message}`;
+        messagesDiv.appendChild(messageDiv);
+        chatInput.value = '';
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    });
+
+    superChatForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const superChatMessage = superChatInput.value;
+        const superChatDiv = document.createElement('div');
+        superChatDiv.classList.add('super-chat');
+        superChatDiv.textContent = `Super Chat: ${superChatMessage}`;
+        superChatsDiv.appendChild(superChatDiv);
+        superChatInput.value = '';
+    });
+
+    giftContainer.addEventListener('click', (e) => {
+        if (e.target.tagName === 'IMG') {
+            const gift = e.target.dataset.gift;
+            const giftAnimation = document.createElement('img');
+            giftAnimation.src = e.target.src;
+            giftAnimation.className = 'gift-animation';
+            giftAnimation.style.left = `${Math.random() * 80 + 10}%`;
+            giftAnimation.style.position = 'absolute';
+            document.body.appendChild(giftAnimation);
+
+            setTimeout(() => {
+                giftAnimation.remove();
+            }, 3000);
+        }
+      });
+      // Initial User Coin Balance
+let userCoins = 500; // Example initial coin balance
+
+// DOM Elements
+const giftSelect = document.getElementById("gift-select");
+const sendGiftButton = document.getElementById("send-gift-button");
+const superChatAmountInput = document.getElementById("super-chat-amount");
+const userCoinsDisplay = document.createElement("p");
+userCoinsDisplay.textContent = `Available Coins: 🪙 ${userCoins}`;
+document.getElementById("gift-container").appendChild(userCoinsDisplay);
+
+// Event Listener: Enable/Disable "Send Gift" Button Based on Coin Balance
+giftSelect.addEventListener("change", () => {
+    const selectedOption = giftSelect.options[giftSelect.selectedIndex];
+    const giftCost = parseInt(selectedOption.dataset.cost);
+
+    // Enable or disable the "Send Gift" button based on coin balance
+    if (userCoins >= giftCost) {
+        sendGiftButton.disabled = false;
+        sendGiftButton.classList.remove("disabled:bg-gray-400");
+        sendGiftButton.classList.add("bg-blue-500");
+    } else {
+        sendGiftButton.disabled = true;
+        sendGiftButton.classList.add("disabled:bg-gray-400");
+        sendGiftButton.classList.remove("bg-blue-500");
+    }
+});
+
+// Event Listener: Send Gift
+sendGiftButton.addEventListener("click", () => {
+    const selectedOption = giftSelect.options[giftSelect.selectedIndex];
+    const giftName = selectedOption.textContent.split(" - ")[0].trim();
+    const giftCost = parseInt(selectedOption.dataset.cost);
+
+    // Check if user has enough coins
+    if (userCoins >= giftCost) {
+        // Deduct coins
+        userCoins -= giftCost;
+
+        // Update UI
+        userCoinsDisplay.textContent = `Available Coins: 🪙 ${userCoins}`;
+        alert(`You sent a ${giftName} for 🪙${giftCost}!`);
+        
+        // Disable the button if coins are insufficient after sending
+        if (userCoins < giftCost) {
+            sendGiftButton.disabled = true;
+            sendGiftButton.classList.add("disabled:bg-gray-400");
+            sendGiftButton.classList.remove("bg-blue-500");
+        }
+    } else {
+        // Handle insufficient balance
+        alert("You do not have enough coins to send this gift.");
+    }
+});5
+
+// Super Chat Button (Optional)
+document.getElementById("send-super-chat").addEventListener("click", () => {
+    const amount = parseInt(superChatAmountInput.value);
+
+    if (amount > 0) {
+        alert(`You sent a Super Chat of INR ${amount}!`);
+        // Implement additional payment logic here if needed
+    } else {
+        alert("Please enter a valid amount for Super Chat.");
+    }
+});
+document.getElementById("send-super-chat").addEventListener("click", function () {
+    const amount = document.getElementById("super-chat-amount").value.trim();
+
+    if (amount && parseInt(amount) > 0) {
+        // Convert amount to paise (1 INR = 100 paise)
+        const amountInPaise = parseInt(amount) * 100;
+
+        // Initiate Razorpay Payment
+        const options = {
+            key: "YOUR_RAZORPAY_KEY", // Replace with your Razorpay API Key
+            amount: amountInPaise, // Amount in paise
+            currency: "INR",
+            name: "Your App Name",
+            description: "Super Chat Payment",
+            image: "https://your-logo-url.com/logo.png", // Optional
+            handler: function (response) {
+                // Payment success callback
+                alert(`Payment Successful: Payment ID ${response.razorpay_payment_id}`);
+                // Optionally, send payment details to the server
+                sendPaymentDetailsToServer(response);
+            },
+            prefill: {
+                name: "User's Name",
+                email: "user@example.com",
+                contact: "9999999999",
+            },
+            theme: {
+                color: "#3399cc",
+            },
+        };
+
+        const razorpay = new Razorpay(options);
+        razorpay.open();
+    } else {
+        alert("Please enter a valid amount!");
+    }
+});
+
+// Send payment details to the server for verification (optional)
+function sendPaymentDetailsToServer(paymentDetails) {
+    fetch("https://your-backend-url.com/payment-success", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(paymentDetails),
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log("Server response:", data);
+        })
+        .catch((error) => {
+            console.error("Error sending payment details to server:", error);
+        });
+}
+// Restrict input to numeric values only
+document.getElementById("super-chat-amount").addEventListener("input", function () {
+    const amountInput = this;
+    amountInput.value = amountInput.value.replace(/[^0-9]/g, ""); // Allow only numbers
+});
+
+// Event listener for "SuperChat" button
+document.getElementById("send-super-chat").addEventListener("click", function () {
+    const amountInput = document.getElementById("super-chat-amount").value.trim();
+
+    if (amountInput && parseInt(amountInput) > 0) {
+        initiateUPIPayment(amountInput);
+    } else {
+        alert("Please enter a valid amount greater than 0.");
+    }
+});
+
+// Payment processing logic (example for UPI apps using Razorpay)
+function initiateUPIPayment(amount) {
+    const amountInPaise = parseInt(amount) * 100; // Convert INR to paise
+
+    const options = {
+        key: "YOUR_RAZORPAY_KEY", // Replace with your Razorpay API Key
+        amount: amountInPaise,
+        currency: "INR",
+        name: "Your App Name",
+        description: "SuperChat Payment",
+        image: "https://your-logo-url.com/logo.png",
+        handler: function (response) {
+            alert(`Payment Successful! Payment ID: ${response.razorpay_payment_id}`);
+            // Optionally send payment details to the server
+            sendPaymentDetailsToServer(response);
+        },
+        prefill: {
+            name: "User Name",
+            email: "user@example.com",
+            contact: "9999999999",
+        },
+        theme: {
+            color: "#3399cc",
+        },
+    };
+
+    const razorpay = new Razorpay(options);
+    razorpay.open();
+}
+
+// Send payment details to the backend (optional)
+function sendPaymentDetailsToServer(paymentDetails) {
+    fetch("https://your-backend-url.com/payment-success", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(paymentDetails),
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log("Server response:", data);
+        })
+        .catch((error) => {
+            console.error("Error sending payment details:", error);
+        });
+}
+// Restrict input to numeric values only
+document.getElementById("super-chat-amount").addEventListener("input", function () {
+    const amountInput = this;
+    amountInput.value = amountInput.value.replace(/[^0-9]/g, ""); // Allow only numbers
+});
+
+// Event listener for "SuperChat" button
+document.getElementById("send-super-chat").addEventListener("click", function () {
+    const amountInput = document.getElementById("super-chat-amount").value.trim();
+
+    if (amountInput && parseInt(amountInput) > 0) {
+        initiateUPIPayment(amountInput);
+    } else {
+        alert("Please enter a valid amount greater than 0.");
+    }
+});
+
+// Payment processing logic (example for UPI apps using Razorpay)
+function initiateUPIPayment(amount) {
+    const amountInPaise = parseInt(amount) * 100; // Convert INR to paise
+
+    const options = {
+        key: "YOUR_RAZORPAY_KEY", // Replace with your Razorpay API Key
+        amount: amountInPaise,
+        currency: "INR",
+        name: "Your App Name",
+        description: "SuperChat Payment",
+        image: "https://your-logo-url.com/logo.png",
+        handler: function (response) {
+            alert(`Payment Successful! Payment ID: ${response.razorpay_payment_id}`);
+            // Optionally send payment details to the server
+            sendPaymentDetailsToServer(response);
+        },
+        prefill: {
+            name: "User Name",
+            email: "user@example.com",
+            contact: "9999999999",
+        },
+        theme: {
+            color: "#3399cc",
+        },
+    };
+
+    const razorpay = new Razorpay(options);
+    razorpay.open();
+}
+
+// Send payment details to the backend (optional)
+function sendPaymentDetailsToServer(paymentDetails) {
+    fetch("https://your-backend-url.com/payment-success", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(paymentDetails),
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log("Server response:", data);
+        })
+        .catch((error) => {
+            console.error("Error sending payment details:", error);
+        });
+}
+document.addEventListener("DOMContentLoaded", function () {
+    const giftSelect = document.getElementById("gift-select");
+    const sendGiftButton = document.getElementById("send-gift-button");
+    const coinBalanceElement = document.getElementById("coin-balance");
+    const giftMessage = document.getElementById("gift-message");
+
+    let coinBalance = parseInt(coinBalanceElement.textContent); // Initial balance
+
+    // Enable/disable the "Send Gift" button based on selection
+    giftSelect.addEventListener("change", function () {
+        const selectedGift = giftSelect.options[giftSelect.selectedIndex];
+        const giftCost = parseInt(selectedGift.dataset.cost);
+
+        if (coinBalance >= giftCost) {
+            sendGiftButton.disabled = false;
+            giftMessage.textContent = "";
+        } else {
+            sendGiftButton.disabled = true;
+            giftMessage.textContent = "Insufficient coins to send this gift.";
+        }
+    });
+
+    // Send Gift Logic
+    sendGiftButton.addEventListener("click", function () {
+        const selectedGift = giftSelect.options[giftSelect.selectedIndex];
+        const giftCost = parseInt(selectedGift.dataset.cost);
+        const giftName = selectedGift.value;
+
+        if (coinBalance >= giftCost) {
+            // Deduct coins
+            coinBalance -= giftCost;
+            coinBalanceElement.textContent = coinBalance;
+
+            // Show success message
+            giftMessage.textContent = `You sent a ${giftName}! Thank you for your support.`;
+            giftMessage.classList.remove("text-red-500");
+            giftMessage.classList.add("text-green-500");
+
+            // Optionally send gift data to the backend
+            sendGiftToBackend(giftName, giftCost);
+        } else {
+            // Show error message
+            giftMessage.textContent = "Insufficient coins to send this gift.";
+            giftMessage.classList.add("text-red-500");
+        }
+
+        // Disable the button after sending
+        sendGiftButton.disabled = true;
+    });
+
+    // Function to send gift data to the backend
+    function sendGiftToBackend(giftName, giftCost) {
+        fetch("https://your-backend-url.com/send-gift", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                giftName: giftName,
+                giftCost: giftCost,
+                timestamp: new Date().toISOString(),
+            }),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log("Gift sent successfully:", data);
+            })
+            .catch((error) => {
+                console.error("Error sending gift data:", error);
+            });
+    }
+});
+
+    </script>
   <script src="stream.js"></script>
   <script src="script.js"></script>
   <script src="Backend/middleware/auth.js"></script>
