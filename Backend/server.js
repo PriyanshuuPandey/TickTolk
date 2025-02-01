@@ -4,6 +4,16 @@ const multer = require('multer');
 const dotenv = require('dotenv');
 const Video = require('./models/Video');
 
+// Add views field to Video schema if not already present
+const videoSchema = new mongoose.Schema({
+  videoUrl: String,
+  likes: { type: Number, default: 0 },
+  comments: [{ text: String, user: String }],
+  views: { type: Number, default: 0 }
+});
+
+const Video = mongoose.model('Video', videoSchema);
+
 dotenv.config();
 
 // Middleware
