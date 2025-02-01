@@ -2,11 +2,11 @@
   "scripts": {
     "start": "node server.js"
   },
-  "name": "TolkIndia",
-  "short_name": "Tolk",
+  "name": "ticktolk",
+  "short_name": "Ticktolk",
   "icons": [                                    
     {
-      "src": "icon.png",
+      "src": "ticktolk.jpegs",        
       "sizes": "192x192",
       "type": "image/png"
     },
