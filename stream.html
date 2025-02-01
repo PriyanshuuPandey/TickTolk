@@ -4,64 +4,92 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Live Streaming</title>
-  <link rel="stylesheet" href="stream.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
 </head>
-<body>
-    <!-- Video Player Section -->
-    <div id="video-container">
-        <video id="livestream" autoplay muted></video>
-        <div class="controls">
-            <button id="start-stream">Start Stream</button>
-            <button id="stop-stream">Stop Stream</button>
-        </div>
-        <div id="viewer-count">Viewers: <span id="viewer-number">0</span></div>
-    </div>
-
-    <!-- Chat Section -->
-    <div id="chat-container">
-      <div id="messages"></div>
-      <form id="chat-form">
-        <input type="text" id="chat-input" placeholder="Type your message..." required>
-        <button type="submit" id="send-button">Send</button>
-      </form>
-    </div>
-
-    <!-- Gift Section -->
-    <div id="gift-container" class="relative p-4 border rounded-lg">
-      <h2 class="text-lg font-bold mb-3">Send a Gift</h2>
-      <div class="gift-container grid grid-cols-2 gap-4">
-          <select id="gift-select" class="block w-full p-2 border rounded-lg text-gray-700 bg-white">
-              <option value="rose"        data-cost="10">   🌹 Rose        - 🪙10  </option>
-              <option value="bouquet"     data-cost="50">   💐 Bouquet     - 🪙50  </option>
-              <option value="diamond"     data-cost="100">  💎 Diamond     - 🪙100 </option>
-              <option value="phoenix"     data-cost="150">  🔥 Phoenix     - 🪙150 </option>
-              <option value="butterfly"   data-cost="200">  🦋 Butterfly   - 🪙200 </option>
-              <option value="crown"       data-cost="250">  👑 Crown       - 🪙250 </option>
-              <option value="castle"      data-cost="300">  🏰 Castle      - 🪙300 </option>
-              <option value="luxury-car"  data-cost="350">  🚗 Luxury Car  - 🪙350 </option>
-              <option value="private-jet" data-cost="400">  ✈️ Private Jet - 🪙400 </option>
-              <option value="galaxy"      data-cost="500">  🌌 Galaxy      - 🪙500 </option>
-          </select>
-          <div class="mt-4">
-            <button id="send-gift-button" class="bg-blue-500 text-white p-2 mt-2 rounded-lg w-full disabled:bg-gray-400" disabled>
-               Send Gift
-            </button>
-          </div>
-        </div>
-    </div>
-
-    <!-- Super Chat Section -->
-    <div class="super-chat">
-        <input
+<body class="bg-gray-100">
+    <!-- Video Section -->
+    <section id="video-container" class="w-full bg-black relative">
+      <video id="livestream" autoplay muted class="w-full h-[300px]"></video>
+      <div class="absolute top-2 left-2 text-white bg-gray-800 px-3 py-1 rounded-md text-sm">
+        Viewers: <span id="viewer-number">0</span>
+      </div>
+      <div class="absolute bottom-2 left-2 flex gap-2">
+        <button id="start-stream" class="px-3 py-2 bg-green-500 text-white rounded-md text-sm">Start</button>
+        <button id="stop-stream" class="px-3 py-2 bg-red-500 text-white rounded-md text-sm">Stop</button>
+      </div>
+    </section>
+  
+    <!-- Main Content -->
+    <main class="p-4 space-y-4">
+      <!-- Chat Section -->
+      <section id="chat-container" class="bg-white p-4 rounded-lg shadow-md">
+        <h2 class="text-lg font-bold mb-2">Live Chat</h2>
+        <div id="messages" class="overflow-y-auto h-[200px] border p-2 rounded-md mb-4"></div>
+        <form id="chat-form" class="flex gap-2">
+          <input
+            type="text"
+            id="chat-input"
+            placeholder="Type your message..."
+            required
+            class="flex-1 p-2 border rounded-md text-sm"
+          />
+          <button
+            type="submit"
+            id="send-button"
+            class="px-4 py-2 bg-blue-500 text-white rounded-md text-sm"
+          >
+            Send
+          </button>
+        </form>
+      </section>
+  
+      <!-- Gift Section -->
+      <section id="gift-container" class="bg-white p-4 rounded-lg shadow-md">
+        <h2 class="text-lg font-bold mb-3">Send a Gift</h2>
+        <select
+          id="gift-select"
+          class="block w-full p-2 border rounded-md mb-4 text-sm"
+        >
+          <option value="rose" data-cost="10">    🌹 Rose    - 🪙10  </option>
+          <option value="bouquet" data-cost="50"> 💐 Bouquet - 🪙50  </option>
+          <option value="diamond" data-cost="100">💎 Diamond - 🪙100 </option>
+          <option value="phoenix" data-cost="150">🔥 Phoenix - 🪙150 </option>
+          <option value="galaxy" data-cost="500"> 🌌 Galaxy  - 🪙500 </option>
+        </select>
+        <button
+          id="send-gift-button"
+          class="w-full px-4 py-2 bg-blue-500 text-white rounded-md disabled:bg-gray-400 text-sm"
+          disabled
+        >
+          Send Gift
+        </button>
+        <p id="user-coins" class="mt-3 text-sm">
+          Available Coins: 🪙 <span id="coin-balance">1000</span>
+        </p>
+        <p id="gift-message" class="text-red-500 mt-2 text-sm"></p>
+      </section>
+  
+      <!-- Super Chat Section -->
+      <section class="bg-white p-4 rounded-lg shadow-md">
+        <h2 class="text-lg font-bold mb-3">Super Chat</h2>
+        <div class="flex gap-2">
+          <input
             id="super-chat-amount"
             type="number"
             placeholder="Enter Amount (INR)"
             min="1"
             step="1"
-            oninput="this.value = this.value.replace(/[^0-9]/g, '');"
-        />
-        <button id="send-super-chat">SuperChat</button>
-    </div>
+            class="flex-1 p-2 border rounded-md text-sm"
+          />
+          <button
+            id="send-super-chat"
+            class="px-4 py-2 bg-green-500 text-white rounded-md text-sm"
+          >
+            SuperChat
+          </button>
+        </div>
+      </section>
+    </main>
 </body>
   <script>
     const video = document.getElementById('livestream');
