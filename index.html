@@ -198,7 +198,7 @@
         </div>
     </div>
 <script>
-  document.getElementById("togglePassword").addEventListener("click", function () {
+document.getElementById("togglePassword").addEventListener("click", function () {
     let passwordInput = document.getElementById("password");
     if (passwordInput.type === "password") {
         passwordInput.type = "text";
@@ -222,7 +222,95 @@ document.getElementById("switchToSignup").addEventListener("click", function (ev
     event.preventDefault();
     alert("Switch to Signup Page (Coming Soon)");
 });
+// Import Firebase
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
 
+// Firebase Configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyAIqWdQBiLgNcb1IrNavB9_Exrv3sxiSeQ",
+  authDomain: "tolkindia.firebaseapp.com",
+  projectId: "tolkindia",
+  storageBucket: "tolkindia.appspot.com",
+  messagingSenderId: "82212526447",
+  appId: "1:82212526447:web:5899fea9b6d6a0d853f09a"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+// Toggle password visibility
+document.getElementById("togglePassword").addEventListener("click", function () {
+    let passwordInput = document.getElementById("password");
+    if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        this.classList.remove("fa-eye-slash");
+        this.classList.add("fa-eye");
+    } else {
+        passwordInput.type = "password";
+        this.classList.remove("fa-eye");
+        this.classList.add("fa-eye-slash");
+    }
+});
+
+// Login Form Submit
+document.getElementById("authForm").addEventListener("submit", function (event) {
+    event.preventDefault();
+    const email = document.getElementById("phoneEmail").value;
+    const password = document.getElementById("password").value;
+
+    signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            // Signed in
+            const user = userCredential.user;
+            alert("Login successful!");
+            // Redirect to the main app page
+            window.location.href = "/main.html";  // Change to your desired page
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            alert("Error: " + errorMessage);
+        });
+});
+
+// Google Login
+document.getElementById("googleLogin").addEventListener("click", function () {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
+        .then((result) => {
+            const user = result.user;
+            alert("Google Login successful!");
+            // Redirect to the main app page
+            window.location.href = "/main.html";  // Change to your desired page
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            alert("Error: " + errorMessage);
+        });
+});
+
+// Signup form (future implementation)
+document.getElementById("switchToSignup").addEventListener("click", function (event) {
+    event.preventDefault();
+    const email = document.getElementById("phoneEmail").value;
+    const password = document.getElementById("password").value;
+
+    createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            const user = userCredential.user;
+            alert("Signup successful!");
+            // Redirect to the main app page
+            window.location.href = "/main.html";  // Change to your desired page
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            alert("Error: " + errorMessage);
+        });
+});
 </script>
       <script src="auth.js"></script>
       <script src="script.js"></script>
