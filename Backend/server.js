@@ -237,7 +237,6 @@ app.post('/api/users/:id/follow', auth, async (req, res) => {
   res.json({ message: "Followed successfully" });
 });
 
-views: { type: Number, default:0};
 app.get('/api/videos/:id', async (req, res) => {
     const video = await Video.findById(req.params.id);
     if (!video) return res.status(404).send("Video not found");
@@ -248,7 +247,7 @@ app.get('/api/videos/:id', async (req, res) => {
     res.json(video);
   });
   async function fetchVideoDetails(videoId) {
-    const response = await fetch(`https://your-app.herokuapp.com/api/videos/${videoId}`);
+    const response = await fetch('http://147.79.70.215/api/videos')
     const video = await response.json();
   
     document.getElementById('video-details').innerHTML = `
