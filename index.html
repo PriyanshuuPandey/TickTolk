@@ -3,58 +3,227 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TickTolk</title>
-    <link rel="stylesheet" href="index.css">
+    <title>TikTok-Style Login/Signup</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
-<body background="background.jpeg"> 
-          <div class="signup">
-          <form class="authent-form" action="/api/signup" method="POST">
-            <h2>Signup</h2>
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-              <label for="password">Password</label>
-              <input type="password" id="password" name="password" required>
-            </div>
-            <button type="submit">Signup</button>
-          </form>
+<style>
+    body {
+        font-family: 'Roboto', sans-serif;
+        background-color: #000;
+    }
+
+    .auth-container {
+        width: 100%;
+        max-width: 400px;
+        padding: 25px;
+        text-align: center;
+        background: linear-gradient(135deg, rgba(255, 0, 0, 0.7), rgba(0, 0, 0, 0.6));
+        border-radius: 20px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .form-container {
+        background: rgba(28, 28, 28, 0.85);
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+        margin-top: 20px;
+    }
+
+    input {
+        width: 100%;
+        padding: 12px;
+        margin: 10px 0;
+        border-radius: 10px;
+        border: 1px solid #333;
+        background: #222;
+        color: white;
+        transition: 0.3s;
+    }
+
+    input:focus {
+        border: 1px solid #f00;
+        background: #333;
+    }
+
+    .password-container {
+        position: relative;
+    }
+
+    .toggle-password {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #f00;
+    }
+
+    .btn {
+        width: 100%;
+        background: linear-gradient(135deg, #ff4c4c, #f00);
+        color: white;
+        padding: 12px;
+        border-radius: 12px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s ease;
+    }
+
+    .btn:hover {
+        background: linear-gradient(135deg, #f00, #ff4c4c);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .options {
+        margin-top: 10px;
+    }
+
+    .options a {
+        color: #ff4c4c;
+        text-decoration: none;
+        font-size: 14px;
+    }
+
+    .switch-text {
+        margin-top: 15px;
+        font-size: 14px;
+        color: #aaa;
+    }
+
+    .divider {
+        position: relative;
+        text-align: center;
+        margin: 20px 0;
+    }
+
+    .divider span {
+        background: rgba(0, 0, 0, 0.6);
+        padding: 0 10px;
+        position: relative;
+        z-index: 1;
+        color: #aaa;
+        font-size: 14px;
+    }
+
+    .divider:before {
+        content: "";
+        width: 100%;
+        height: 1px;
+        background: #444;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+    }
+
+    .social-login {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .social-btn {
+        background: #333;
+        color: white;
+        padding: 12px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s ease;
+        font-size: 14px;
+    }
+
+    .social-btn:hover {
+        background: #444;
+    }
+
+    .social-btn i {
+        margin-right: 10px;
+        font-size: 18px;
+    }
+
+    .google { background: white; color: black; }
+    .facebook { background: #1877F2; }
+    .apple { background: black; }
+
+    h1 {
+        font-size: 32px;
+        color: white;
+    }
+
+    p {
+        font-size: 14px;
+        color: gray;
+    }
+
+</style>
+<body class="bg-black text-white flex justify-center items-center h-screen">
+
+    <div class="auth-container">
+        <!-- Logo -->
+        <div class="text-center">
+            <h1 class="font-bold">Welcome to <span class="text-red-500">TickTolk</span></h1>
+            <p class="text-gray-400 text-sm">Join now to watch, create, and share videos!</p>
         </div>
-        <div class="container">
-          <form class="auth-form" action="/api/login" method="POST">
-            <h2>Login</h2>
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" id="email" name="email" required>
+
+        <!-- Login Form -->
+        <div class="form-container">
+            <form id="authForm">
+                <input type="text" id="phoneEmail" placeholder="Phone number, email, or username" required>
+                <div class="password-container">
+                    <input type="password" id="password" placeholder="Password" required>
+                    <i class="fas fa-eye-slash toggle-password" id="togglePassword"></i>
+                </div>
+                <button type="submit" class="btn">Login</button>
+            </form>
+
+            <div class="options">
+                <a href="#" class="forgot-password">Forgot password?</a>
+                <p class="switch-text">Don't have an account? <a href="#" id="switchToSignup">Sign up</a></p>
             </div>
-            <div class="form-group">
-              <label for="password">Password</label>
-              <input type="password" id="password" name="password" required>
+
+            <div class="divider"><span>OR</span></div>
+
+            <!-- Social Login -->
+            <div class="social-login">
+                <button class="social-btn google"><i class="fab fa-google"></i> Continue with Google</button>
+                <button class="social-btn facebook"><i class="fab fa-facebook"></i> Continue with Facebook</button>
             </div>
-            <button type="submit">Login</button>
-          </form>
         </div>
-      <script>
-      async function signUp() {
-        const username = document.getElementById('signup-username').value;
-        const email = document.getElementById('signup-email').value;
-        const password = document.getElementById('signup-password').value;
-        // const API_URL = "https://your-app-name.herokuapp.com";      
-        const response = await fetch('http://localhost:5000/api/auth/signup', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ username, email, password }),
-        });
-        const data = await response.json();
-        if (response.ok) {
-          localStorage.setItem('token', data.token);
-          alert('Sign up successful!');
-        } else {
-          alert(data.message || 'Error signing up');
-        }
-      }
-      </script>
+    </div>
+<script>
+  document.getElementById("togglePassword").addEventListener("click", function () {
+    let passwordInput = document.getElementById("password");
+    if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        this.classList.remove("fa-eye-slash");
+        this.classList.add("fa-eye");
+    } else {
+        passwordInput.type = "password";
+        this.classList.remove("fa-eye");
+        this.classList.add("fa-eye-slash");
+    }
+});
+
+// Fake authentication for demo
+document.getElementById("authForm").addEventListener("submit", function (event) {
+    event.preventDefault();
+    alert("Login successful!");
+});
+
+// Toggle between login & signup (Future enhancement)
+document.getElementById("switchToSignup").addEventListener("click", function (event) {
+    event.preventDefault();
+    alert("Switch to Signup Page (Coming Soon)");
+});
+
+</script>
       <script src="auth.js"></script>
       <script src="script.js"></script>
       <script src="Backend/middleware/auth.js"></script>
