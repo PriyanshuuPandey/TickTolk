@@ -3,9 +3,10 @@
 }
 
 .sidebar img{
-    height: 25px;
-    width: 25px;
+    height: 40px;
+    width: 40px;
     margin: 10px;
+    border-radius: 50%;
 }
 .modal {
     display: none;
