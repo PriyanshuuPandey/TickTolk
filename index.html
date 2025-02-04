@@ -68,6 +68,7 @@
         background: linear-gradient(135deg, #ff4c4c, #f00);
         color: white;
         padding: 12px;
+        margin: 10px 0;
         border-radius: 12px;
         font-weight: bold;
         cursor: pointer;
@@ -177,18 +178,13 @@
         <!-- Login Form -->
         <div class="form-container">
             <form id="authForm">
-                <input type="text" id="phoneEmail" placeholder="Phone number, email, or username" required>
-                <div class="password-container">
-                    <input type="password" id="password" placeholder="Password" required>
-                    <i class="fas fa-eye-slash toggle-password" id="togglePassword"></i>
-                </div>
-                <button type="submit" class="btn">Login</button>
+                <input type="text" id="phoneNumber" placeholder="Enter phone number or email-id" required>
+                <div id="recaptcha-container"></div>
+                <button class="btn" onclick="sendOTP()">Send OTP</button>
+    
+                <input type="text" id="otp" placeholder="Enter OTP">
+                <button class="btn" onclick="verifyOTP()">Verify OTP</button>
             </form>
-
-            <div class="options">
-                <a href="#" class="forgot-password">Forgot password?</a>
-                <p class="switch-text">Don't have an account? <a href="#" id="switchToSignup">Sign up</a></p>
-            </div>
 
             <div class="divider"><span>OR</span></div>
 

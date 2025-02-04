@@ -613,3 +613,17 @@ io.on("connection", (socket) => {
         io.emit("update-viewers", viewers); // Update count
     });
 });
+// Handle incoming chat messages
+io.on("connection", (socket) => {
+  console.log("User connected: " + socket.id);
+
+  // Broadcast chat messages to the room
+  socket.on("chat-message", (message) => {
+      socket.to("room1").emit("chat-message", message);
+  });
+
+  // Handle disconnect
+  socket.on("disconnect", () => {
+      console.log("User disconnected: " + socket.id);
+  });
+});
