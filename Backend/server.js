@@ -153,7 +153,7 @@ app.post('/api/videos/:id/like', auth, async (req, res) => {
     await video.save();
     res.json(video.comments);
   });
-  const PORT = process.env.PORT || 5000;
+  // const PORT = process.env.PORT || 5000; (Duplicate declaration removed)
   // Follow User
 app.post('/api/users/:id/follow', auth, async (req, res) => {
     const userToFollow = await User.findById(req.params.id);
@@ -267,7 +267,7 @@ app.get('/api/videos/:id', async (req, res) => {
   cors: {
     origin: "*",
     methods: ["GET", "POST"],
-  },
+  }
 }).on('connection', (socket) => {
     console.log('A user connected:', socket.id);
   
@@ -570,3 +570,35 @@ const { limiter, helmet } = require("./security");
 
 app.use(helmet());
 app.use(limiter);
+require("dotenv").config();
+const express = require("express");
+const http = require("http");
+const { Server } = require("socket.io");
+const cors = require("cors");
+
+app.use(cors());
+
+server.listen(PORT, () => console.log(`WebRTC Signaling Server running on port ${PORT}`));
+    cors: {
+        origin: "*",
+    },
+
+io.on("connection", (socket) => {
+    console.log("User Connected:", socket.id);
+
+    socket.on("join-room", (roomId, userId) => {
+        socket.join(roomId);
+        socket.to(roomId).emit("user-connected", userId);
+
+        socket.on("disconnect", () => {
+            socket.to(roomId).emit("user-disconnected", userId);
+        });
+    });
+
+    socket.on("signal", (data) => {
+        socket.to(data.to).emit("signal", { from: socket.id, signal: data.signal });
+    });
+});
+
+const PORT = process.env.PORT || 5000;
+server.listen(PORT, () => console.log(`WebRTC Signaling Server running on port ${PORT}`));
