@@ -560,3 +560,13 @@ app.get("/", (req, res) => {
 
 // Server listening on port
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+const http = require("http");
+const startSocket = require("./socket");
+
+startSocket(http.createServer(app));
+
+http.createServer(app).listen(PORT, () => console.log(`Server running on port ${PORT}`));
+const { limiter, helmet } = require("./security");
+
+app.use(helmet());
+app.use(limiter);
