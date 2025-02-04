@@ -401,7 +401,6 @@ app.post('/create-subscription', async (req, res) => {
 
   res.json({ subscription });
 });
-const express = require('express');
 const bodyParser = require('body-parser');
 
 app.use(bodyParser.json());
@@ -548,3 +547,16 @@ new Server((http.createServer(app)), {
 });
 
 (http.createServer(app)).listen(3000, () => console.log("Server running on port 3000"));
+require("dotenv").config();
+const express = require("express");
+const cors = require("cors");
+
+app.use(cors());
+app.use(express.json());
+
+app.get("/", (req, res) => {
+    res.send("TickTolk Server is Running!");
+});
+
+// Server listening on port
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
