@@ -74,7 +74,7 @@ main {
 }
 
 .profile-nav button.active {
-  background-color: #ff0055;
+  background-color: #ff0000;
   color: #fff;
 }
 
@@ -108,5 +108,5 @@ button {
 }
 
 button:hover {
-  background-color: #ff3366;
+  background-color: #ff3333;
 }
