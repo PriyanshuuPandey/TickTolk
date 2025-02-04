@@ -580,8 +580,8 @@ app.use(cors());
 
 server.listen(PORT, () => console.log(`WebRTC Signaling Server running on port ${PORT}`));
     cors: {
-        origin: "*",
-    },
+        origin: "*"
+    }
 
 io.on("connection", (socket) => {
     console.log("User Connected:", socket.id);
@@ -602,3 +602,14 @@ io.on("connection", (socket) => {
 
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => console.log(`WebRTC Signaling Server running on port ${PORT}`));
+let viewers = 0;
+
+io.on("connection", (socket) => {
+    viewers++;
+    io.emit("update-viewers", viewers); // Send updated count
+
+    socket.on("disconnect", () => {
+        viewers--;
+        io.emit("update-viewers", viewers); // Update count
+    });
+});
