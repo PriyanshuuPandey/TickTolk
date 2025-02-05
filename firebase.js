@@ -2,12 +2,13 @@ import firebase from 'firebase/app';
 import 'firebase/messaging';
 
 const firebaseConfig = {
-  apiKey: "your-api-key",
-  authDomain: "your-app-id.firebaseapp.com",
-  projectId: "your-project-id",
-  storageBucket: "your-project-id.appspot.com",
-  messagingSenderId: "your-sender-id",
-  appId: "your-app-id",
+  apiKey: "AIzaSyAIqWdQBiLgNcb1IrNavB9_Exrv3sxiSeQ",
+  authDomain: "tolkindia.firebaseapp.com",
+  projectId: "tolkindia",
+  storageBucket: "tolkindia.firebasestorage.app",
+  messagingSenderId: "82212526447",
+  appId: "1:82212526447:web:5899fea9b6d6a0d853f09a",
+  measurementId: "G-9XR93DWVXN"
 };
 
 firebase.initializeApp(firebaseConfig);

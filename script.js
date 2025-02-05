@@ -161,7 +161,7 @@ async function addComment(videoId) {
 }
 async function followUser(userId) {
   const token = localStorage.getItem('token');
-  const response = await fetch(`https://your-app-name.herokuapp.com/api/users/${userId}/follow`, {
+  const response = await fetch(`https://147.79.70.215/api/users/${userId}/follow`, {
     method: 'POST',
     headers: { 'Authorization': token },
   });
@@ -171,7 +171,7 @@ async function followUser(userId) {
 
 async function unfollowUser(userId) {
   const token = localStorage.getItem('token');
-  const response = await fetch(`https://your-app-name.herokuapp.com/api/users/${userId}/unfollow`, {
+  const response = await fetch(`https://147.79.70.215/api/users/${userId}/unfollow`, {
     method: 'POST',
     headers: { 'Authorization': token },
   });

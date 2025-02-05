@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const multer = require('multer');
 const dotenv = require('dotenv');
 const Video = require('./models/Video');
+require("dotenv").config();
+
 
 // Add views field to Video schema if not already present
 const videoSchema = new mongoose.Schema({
@@ -627,3 +629,4 @@ io.on("connection", (socket) => {
       console.log("User disconnected: " + socket.id);
   });
 });
+ 
