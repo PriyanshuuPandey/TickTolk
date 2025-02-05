@@ -272,7 +272,7 @@ document.getElementById("send-super-chat").addEventListener("click", function ()
 
 // Send payment details to the server for verification (optional)
 function sendPaymentDetailsToServer(paymentDetails) {
-    fetch("https://your-backend-url.com/payment-success", {
+    fetch("https://localhost:5000/api/payment-success", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -336,7 +336,7 @@ function initiateUPIPayment(amount) {
 
 // Send payment details to the backend (optional)
 function sendPaymentDetailsToServer(paymentDetails) {
-    fetch("https://your-backend-url.com/payment-success", {
+    fetch("https://localhost:5000/api/payment-success", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -400,7 +400,7 @@ function initiateUPIPayment(amount) {
 
 // Send payment details to the backend (optional)
 function sendPaymentDetailsToServer(paymentDetails) {
-    fetch("https://your-backend-url.com/payment-success", {
+    fetch("https://localhost:5000/api/payment-success", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -467,7 +467,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Function to send gift data to the backend
     function sendGiftToBackend(giftName, giftCost) {
-        fetch("https://your-backend-url.com/send-gift", {
+        fetch("https://localhost:5000/api/send-gift", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -504,4 +504,9 @@ document.addEventListener("DOMContentLoaded", function () {
   <script src="Backend/routes/video.js"></script>
   <script src="Backend/server.js"></script>
   <script src="Backend/serviceworker.js"></script>
+  <script src="Backend/firebaseconfig.js"></script>
+  <script src="Backend/redis.js"></script>
+  <script src="Backend/security.js"></script>
+  <script src="Backend/socket.js"></script>
+  <script src="Backend/webrtc.js"></script>
 </html>
