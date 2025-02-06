@@ -5,14 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TickTolk</title>
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="main.css">
-  <meta name="description" content="Watch and share your favorite videos on our TolkIndia platform.">
-  <meta name="keywords" content="videos, social media, short videos, trending, chat">
-  <meta name="author" content="TolkIndia">
-  <meta property="og:title" content="TolkIndia - Share Videos">
-  <meta property="og:description" content="Join our platform to watch and share trending videos.">
-  <meta property="og:image" content="link-to-image.jpg">
-  <meta property="og:url" content="https://tolkindia.com">
 </head>
 
 <style>
@@ -26,7 +18,70 @@
     font-family: Arial, sans-serif;
     color: #fff;
     overflow: hidden;
-    background-color: transparent;
+    background-color: black;
+  }
+
+  .video-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+  }
+
+  .video-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    scroll-snap-align: start;
+  }
+
+  video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .sidebar {
+    position: absolute;
+    right: 10px;
+    bottom: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .icon {
+    cursor: pointer;
+    text-align: center;
+  }
+
+  .icon img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .video-details {
+    position: absolute;
+    bottom: 60px;
+    left: 15px;
+    color: white;
+    font-size: 14px;
+    width: 60%;
+  }
+
+  .music {
+    display: flex;
+    align-items: center;
+  }
+
+  .music::before {
+    content: "🎵";
+    margin-right: 5px;
   }
 
   .footer {
@@ -34,12 +89,11 @@
     bottom: 0;
     width: 100%;
     background-color: black;
-    border-top: 1px solid #ccc;
     display: flex;
     justify-content: space-around;
     align-items: center;
     padding: 10px 0;
-    z-index: 1000;
+    border-top: 1px solid #ccc;
   }
 
   .footer a {
@@ -52,14 +106,79 @@
   .footer a:hover {
     color: #fff;
   }
-
-  .footer img {
-    height: 30px;
-    width: 30px;
-  }
 </style>
 
 <body>
+
+  <div class="video-container" id="video-container">
+    
+    <div class="video-wrapper">
+      <video class="video" autoplay muted loop>
+        <source src="recording.mp4" type="video/mp4">
+      </video>
+      <div class="sidebar">
+        <div class="icon like-btn" data-index="0">
+          <img src="like.jpeg"><span class="like-count">0</span>
+        </div>
+        <div class="icon comment-btn" data-index="0">
+          <img src="comment.jpeg"><span>0</span>
+        </div>
+        <div class="icon share-btn" data-index="0">
+          <img src="share.jpeg"><span>0</span>
+        </div>
+      </div>
+      <div class="video-details">
+        <span>@user1</span>
+        <p>Amazing video content! #fun #viral</p>
+        <p class="music">Original Sound - Artist</p>
+      </div>
+    </div>
+
+    <div class="video-wrapper">
+      <video class="video" muted>
+        <source src="video2.mp4" type="video/mp4">
+      </video>
+      <div class="sidebar">
+        <div class="icon like-btn" data-index="1">
+          <img src="like.jpeg"><span class="like-count">0</span>
+        </div>
+        <div class="icon comment-btn" data-index="1">
+          <img src="comment.jpeg"><span>0</span>
+        </div>
+        <div class="icon share-btn" data-index="1">
+          <img src="share.jpeg"><span>0</span>
+        </div>
+      </div>
+      <div class="video-details">
+        <span>@user2</span>
+        <p>Don't miss this epic moment! #wow</p>
+        <p class="music">Original Sound - DJ Mix</p>
+      </div>
+    </div>
+
+    <div class="video-wrapper">
+      <video class="video" muted>
+        <source src="video3.mp4" type="video/mp4">
+      </video>
+      <div class="sidebar">
+        <div class="icon like-btn" data-index="2">
+          <img src="like.jpeg"><span class="like-count">0</span>
+        </div>
+        <div class="icon comment-btn" data-index="2">
+          <img src="comment.jpeg"><span>0</span>
+        </div>
+        <div class="icon share-btn" data-index="2">
+          <img src="share.jpeg"><span>0</span>
+        </div>
+      </div>
+      <div class="video-details">
+        <span>@user3</span>
+        <p>What a view! 🌅 #nature</p>
+        <p class="music">Original Sound - Nature Beats</p>
+      </div>
+    </div>
+
+  </div>
 
   <div class="footer">
     <a href="profile.html">
@@ -84,39 +203,10 @@
     </a>
   </div>
 
-  <div class="tiktok-app">
-    <div class="video-container" id="video-container">
-      <video class="video" autoplay muted loop>
-        <source src="recording.mp4" type="video/mp4">
-      </video>
-      <video class="video" muted>
-        <source src="video2.mp4" type="video/mp4">
-      </video>
-      <video class="video" muted>
-        <source src="video3.mp4" type="video/mp4">
-      </video>
-    </div>
-
-    <div class="sidebar">
-      <div class="icon"><img src="like.jpeg"><span id="like-count">0</span></div>
-      <div class="icon"><img src="comment.jpeg"><span>0</span></div>
-      <div class="icon"><img src="share.jpeg"> <span>0</span></div>
-    </div>
-
-    <a href="creatorprofile.html">
-      <div class="video-details">
-        <span>@username</span>
-        <p>Awesome video caption goes here! #trending #fun</p>
-        <p class="music">🎵 Original Sound - Artist Name</p>
-      </div>
-    </a>
-  </div>
-
-  <!-- Scripts -->
-  <script src="main.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const videos = document.querySelectorAll('.video');
+      const likeButtons = document.querySelectorAll('.like-btn');
       let currentIndex = 0;
 
       function playCurrentVideo() {
@@ -144,19 +234,14 @@
         scrollToVideo();
       });
 
-      let touchStartY = 0;
-      document.getElementById('video-container').addEventListener('touchstart', (e) => {
-        touchStartY = e.touches[0].clientY;
-      });
-
-      document.getElementById('video-container').addEventListener('touchend', (e) => {
-        const touchEndY = e.changedTouches[0].clientY;
-        if (touchStartY - touchEndY > 50 && currentIndex < videos.length - 1) {
-          currentIndex++;
-        } else if (touchEndY - touchStartY > 50 && currentIndex > 0) {
-          currentIndex--;
-        }
-        scrollToVideo();
+      likeButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+          const index = e.target.closest('.like-btn').getAttribute('data-index');
+          const countSpan = document.querySelector(`.like-btn[data-index="${index}"] span`);
+          let count = parseInt(countSpan.textContent);
+          count++;
+          countSpan.textContent = count;
+        });
       });
 
       playCurrentVideo();
