@@ -6,9 +6,6 @@
   <title>TickTolk</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="main.css">
-</head>
-<head>
-  <meta charset="UTF-8">
   <meta name="description" content="Watch and share your favorite videos on our TolkIndia platform.">
   <meta name="keywords" content="videos, social media, short videos, trending, chat">
   <meta name="author" content="TolkIndia">
@@ -16,71 +13,78 @@
   <meta property="og:description" content="Join our platform to watch and share trending videos.">
   <meta property="og:image" content="link-to-image.jpg">
   <meta property="og:url" content="https://tolkindia.com">
-  <title>TolkIndia</title>
 </head>
+
 <style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
   body {
-      background-color: none;
-      margin: 0;
-      font-family: Arial, sans-serif;
+    font-family: Arial, sans-serif;
+    color: #fff;
+    overflow: hidden;
+    background-color: transparent;
   }
+
   .footer {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      background-color: black;
-      border-top: 1px solid #ccc;
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      padding: 10px 0;
-      z-index: 1000;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: black;
+    border-top: 1px solid #ccc;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 0;
+    z-index: 1000;
   }
+
   .footer a {
-      text-decoration: none;
-      color: #666;
-      font-size: 14px;
-      text-align: center;
+    text-decoration: none;
+    color: #666;
+    font-size: 14px;
+    text-align: center;
   }
+
   .footer a:hover {
-      color: #000;
+    color: #fff;
   }
+
   .footer img {
-      font-size: 20px;
-      display: block;
-      margin-bottom: 5px;
-      height: 30px;
-      width: 30px;
-  } 
+    height: 30px;
+    width: 30px;
+  }
 </style>
+
 <body>
-<div class="footer">
-<a href="profile.html">
-  <img src="profile.jpeg" alt="Profile">
-  <span>Profile</span>
-  </a>
-</a>
-<a href="search.html">
-  <img src="search.jpeg" alt="Search">
-  <span>Search</span>
-</a>
-<a href="videorecording.html">
-  <img src="videorecording.jpeg" alt="Create">
-  <span>Create</span>
-</a>
-<a href="chat.html">
-  <img src="inbox.jpeg" alt="Chat">
-  <span>Inbox</span>
-</a>
-<a href="livestreaming.html">
-  <img src="livestreaming.jpeg" alt="stream">
-  <span>Stream</span>
-</a>
-</div>
-<body>
-  <!-- Main Container -->
+
+  <div class="footer">
+    <a href="profile.html">
+      <img src="profile.jpeg" alt="Profile">
+      <span>Profile</span>
+    </a>
+    <a href="search.html">
+      <img src="search.jpeg" alt="Search">
+      <span>Search</span>
+    </a>
+    <a href="videorecording.html">
+      <img src="videorecording.jpeg" alt="Create">
+      <span>Create</span>
+    </a>
+    <a href="chat.html">
+      <img src="inbox.jpeg" alt="Chat">
+      <span>Inbox</span>
+    </a>
+    <a href="livestreaming.html">
+      <img src="livestreaming.jpeg" alt="Stream">
+      <span>Stream</span>
+    </a>
+  </div>
+
   <div class="tiktok-app">
-    <!-- Video Sections (Multiple Videos for Swipe Effect) -->
     <div class="video-container" id="video-container">
       <video class="video" autoplay muted loop>
         <source src="recording.mp4" type="video/mp4">
@@ -92,37 +96,72 @@
         <source src="video3.mp4" type="video/mp4">
       </video>
     </div>
-    <!-- Sidebar for Interactions -->
-    <!-- Sidebar for Interactions -->
-<div class="sidebar">
-    <div class="icon"><img src="like.jpeg"><span id="like-count">0</span></div>
-    <div class="icon"><img src="comment.jpeg"><span>0</span></div>
-    <div class="icon"><img src="share.jpeg"> <span>0</span></div>
-  </div>
-<!-- Video Details -->
- <a href="creatorprofile.html">
-<div class="video-details">
-  <span>@username</span>
-    <p>Awesome video caption goes here! #trending #fun</p>
-    <p class="music">🎵 Original Sound - Artist Name</p>
+
+    <div class="sidebar">
+      <div class="icon"><img src="like.jpeg"><span id="like-count">0</span></div>
+      <div class="icon"><img src="comment.jpeg"><span>0</span></div>
+      <div class="icon"><img src="share.jpeg"> <span>0</span></div>
     </div>
-  </a>
+
+    <a href="creatorprofile.html">
+      <div class="video-details">
+        <span>@username</span>
+        <p>Awesome video caption goes here! #trending #fun</p>
+        <p class="music">🎵 Original Sound - Artist Name</p>
+      </div>
+    </a>
   </div>
-  <!-- JavaScript -->
+
+  <!-- Scripts -->
   <script src="main.js"></script>
-  <script src="script.js"></script>
-  <script src="Backend/middleware/auth.js"></script>
-  <script src="Backend/middleware/authmiddleware.js"></script>
-  <script src="Backend/models/post.js"></script>
-  <script src="Backend/models/user.js"></script>
-  <script src="Backend/models/video.js"></script>
-  <script src="Backend/package.json"></script>
-  <script src="Backend/recommendations.js"></script>
-  <script src="Backend/routes/auth.js"></script>
-  <script src="Backend/routes/authroute.js"></script>
-  <script src="Backend/routes/handler.js"></script>
-  <script src="Backend/routes/video.js"></script>
-  <script src="Backend/server.js"></script>
-  <script src="Backend/serviceworker.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const videos = document.querySelectorAll('.video');
+      let currentIndex = 0;
+
+      function playCurrentVideo() {
+        videos.forEach((video, index) => {
+          if (index === currentIndex) {
+            video.play();
+          } else {
+            video.pause();
+            video.currentTime = 0;
+          }
+        });
+      }
+
+      function scrollToVideo() {
+        videos[currentIndex].scrollIntoView({ behavior: 'smooth' });
+        playCurrentVideo();
+      }
+
+      document.getElementById('video-container').addEventListener('wheel', (event) => {
+        if (event.deltaY > 0 && currentIndex < videos.length - 1) {
+          currentIndex++;
+        } else if (event.deltaY < 0 && currentIndex > 0) {
+          currentIndex--;
+        }
+        scrollToVideo();
+      });
+
+      let touchStartY = 0;
+      document.getElementById('video-container').addEventListener('touchstart', (e) => {
+        touchStartY = e.touches[0].clientY;
+      });
+
+      document.getElementById('video-container').addEventListener('touchend', (e) => {
+        const touchEndY = e.changedTouches[0].clientY;
+        if (touchStartY - touchEndY > 50 && currentIndex < videos.length - 1) {
+          currentIndex++;
+        } else if (touchEndY - touchStartY > 50 && currentIndex > 0) {
+          currentIndex--;
+        }
+        scrollToVideo();
+      });
+
+      playCurrentVideo();
+    });
+  </script>
+
 </body>
 </html>
