@@ -1,94 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Inbox</title>
-  <link rel="stylesheet" href="chat.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"/>
+    <style>
+        body { font-family: 'Roboto', sans-serif; }
+        .sidebar { transition: transform 0.3s ease; }
+        .sidebar-hidden { transform: translateX(-100%); }
+    </style>
 </head>
-<body>
-  <main class="chat-layout">
-    <div class="chat-sidebar">
-      <div class="chat-header">Chats</div>
-      <div id="chat-list">
-        <div class="chat-item active" data-user="User 1">User 1</div>
-        <div class="chat-item" data-user="User 2">User 2</div>
-      </div>
-      <button id="add-chat-btn">Add Person</button>
+<body class="bg-gray-100 h-screen flex">
+    <!-- Sidebar -->
+    <div class="w-64 bg-white shadow-lg flex flex-col sidebar sidebar-hidden fixed h-full z-50" id="sidebar">
+        <div class="p-4 border-b flex items-center justify-between">
+            <h1 class="text-xl font-bold">Contacts</h1>
+            <button class="text-gray-500" onclick="toggleSidebar()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="p-4 border-b flex items-center justify-between">
+            <h2 class="text-lg font-semibold">People</h2>
+            <button class="bg-blue-500 text-white px-3 py-1 rounded" onclick="addContact()">
+                <i class="fas fa-user-plus"></i> Add
+            </button>
+        </div>
+        <div class="flex-1 overflow-y-auto">
+            <ul id="contact-list"></ul>
+        </div>
     </div>
-    <div class="chat-window">
-      <div class="chat-header" id="chat-header">User 1</div>
-      <div class="chat-messages" id="chat-messages">
-        <div class="message received">Hello!</div>
-        <div class="message sent">Hi! How are you?</div>
-      </div>
-      <div class="chat-input-container">
-        <input type="text" id="chat-input" placeholder="Type a message...">
-        <button id="send-btn">Send</button>
-      </div>
+
+    <!-- Chat Area -->
+    <div class="flex-1 flex flex-col">
+        <div class="p-4 border-b bg-white flex items-center justify-between">
+            <h2 class="text-lg font-semibold" id="chat-title">Chat</h2>
+            <button class="text-gray-500" onclick="toggleSidebar()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <div class="flex-1 p-4 overflow-y-auto" id="chat-messages"></div>
+        <div class="p-4 border-t bg-white flex items-center">
+            <input class="flex-1 border rounded-lg p-2 mr-2" placeholder="Type a message..." id="message-input" type="text"/>
+            <button class="bg-blue-500 text-white px-4 py-2 rounded-lg" onclick="sendMessage()">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
     </div>
-  </main>
-  <script>
-    const chatList = document.getElementById("chat-list");
-    const chatHeader = document.getElementById("chat-header");
-    const chatMessages = document.getElementById("chat-messages");
-    const chatInput = document.getElementById("chat-input");
-    const sendBtn = document.getElementById("send-btn");
-    const addChatBtn = document.getElementById("add-chat-btn");
 
-    let activeUser = "User 1";
-    const chats = {
-      "User 1": [
-        { type: "received", text: "Hello!" },
-        { type: "sent", text: "Hi! How are you?" }
-      ],
-      "User 2": []
-    };
+    <script>
+        const socket = io("http://localhost:5000");
+        let contacts = [];
+        let activeChat = null;
+        let userPhone = prompt("Enter your phone number to log in:");
 
-    const renderMessages = () => {
-      chatMessages.innerHTML = "";
-      chats[activeUser].forEach(msg => {
-        const messageDiv = document.createElement("div");
-        messageDiv.className = `message ${msg.type}`;
-        messageDiv.textContent = msg.text;
-        chatMessages.appendChild(messageDiv);
-      });
-    };
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('sidebar-hidden');
+        }
 
-    chatList.addEventListener("click", (e) => {
-      if (e.target.classList.contains("chat-item")) {
-        document.querySelectorAll(".chat-item").forEach(item => item.classList.remove("active"));
-        e.target.classList.add("active");
-        activeUser = e.target.getAttribute("data-user");
-        chatHeader.textContent = activeUser;
-        renderMessages();
-      }
-    });
+        async function fetchContacts() {
+            const res = await axios.get("http://localhost:5000/contacts");
+            contacts = res.data;
+            renderContacts();
+        }
 
-    sendBtn.addEventListener("click", () => {
-      const messageText = chatInput.value.trim();
-      if (messageText) {
-        chats[activeUser].push({ type: "sent", text: messageText });
-        chatInput.value = "";
-        renderMessages();
-      }
-    });
+        async function fetchMessages() {
+            if (!activeChat) return;
+            const res = await axios.get(`http://localhost:5000/messages/${userPhone}/${activeChat}`);
+            document.getElementById("chat-messages").innerHTML = "";
+            res.data.forEach(msg => displayMessage(msg.from === userPhone ? "sent" : "received", msg.text));
+        }
 
-    addChatBtn.addEventListener("click", () => {
-      const newUserName = prompt("Enter the name of the new chat:");
-      if (newUserName && !chats[newUserName]) {
-        chats[newUserName] = [];
-        const newChatItem = document.createElement("div");
-        newChatItem.className = "chat-item";
-        newChatItem.setAttribute("data-user", newUserName);
-        newChatItem.textContent = newUserName;
-        chatList.appendChild(newChatItem);
-      } else if (chats[newUserName]) {
-        alert("Chat with this user already exists.");
-      }
-    });
+        function addContact() {
+            const name = prompt("Enter contact name:");
+            const phone = prompt("Enter phone number:");
 
-    renderMessages();
-  </script>
+            if (name && phone && !contacts.find(c => c.phone === phone)) {
+                axios.post("http://localhost:5000/addContact", { name, phone }).then(() => {
+                    contacts.push({ name, phone });
+                    renderContacts();
+                    alert(`Contact ${name} added!`);
+                }).catch(err => alert(err.response.data.error));
+            }
+        }
+
+        function renderContacts() {
+            const contactList = document.getElementById("contact-list");
+            contactList.innerHTML = "";
+            contacts.forEach(contact => {
+                const li = document.createElement("li");
+                li.classList.add("p-3", "border-b", "cursor-pointer", "hover:bg-gray-200");
+                li.textContent = `${contact.name} (${contact.phone})`;
+                li.onclick = () => openChat(contact);
+                contactList.appendChild(li);
+            });
+        }
+
+        function openChat(contact) {
+            activeChat = contact.phone;
+            document.getElementById("chat-title").textContent = `Chat with ${contact.name}`;
+            fetchMessages();
+        }
+
+        function sendMessage() {
+            const messageInput = document.getElementById("message-input");
+            const message = messageInput.value.trim();
+
+            if (message && activeChat) {
+                socket.emit("sendMessage", { from: userPhone, to: activeChat, text: message });
+                displayMessage("sent", message);
+                messageInput.value = "";
+            }
+        }
+
+        function displayMessage(type, text) {
+            const chatMessages = document.getElementById("chat-messages");
+            chatMessages.innerHTML += `<div class="p-3 rounded-lg mb-4 ${type === "sent" ? "bg-blue-500 text-white" : "bg-gray-200"}">${text}</div>`;
+        }
+
+        socket.on("receiveMessage", fetchMessages);
+        fetchContacts();
+    </script>
     <script src="script.js"></script>
     <script src="Backend/middleware/auth.js"></script>
     <script src="Backend/middleware/authmiddleware.js"></script>
