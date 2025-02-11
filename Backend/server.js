@@ -300,7 +300,7 @@ app.use((err, req, res, next) => {
   res.status(500).json({ message: 'Something went wrong!' });
 });
 const Sentry = require('@sentry/node');
-Sentry.init({ dsn: 'your-sentry-dsn' });
+Sentry.init({ dsn: 'https://81463965157414e3d76f5e671006838c@o4508778338713600.ingest.us.sentry.io/4508778342711296' });
 
 app.use(Sentry.Handlers.errorHandler());
 const admin = require('firebase-admin');
@@ -372,27 +372,39 @@ app.post('/upload', upload.single('video'), (req, res) => {
   // Process file (e.g., move to S3, update database)
   res.send('File uploaded successfully');
 });
-const stripe = require('stripe')('your-stripe-secret-key');
+const express = require('express');
+const Razorpay = require('razorpay');
 
+app.use(express.json()); // Middleware to parse JSON request bodies
+
+// Create a subscription
 app.post('/create-subscription', async (req, res) => {
-  const { email, paymentMethodId } = req.body;
+  try {
+    const { plan_id, customer_email } = req.body;  // Razorpay requires a plan_id
 
-  const customer = await stripe.customers.create({
-    email,
-    payment_method: paymentMethodId,
-    invoice_settings: {
-      default_payment_method: paymentMethodId,
-    },
-  });
+    // Initialize Razorpay
+    const razorpay = new Razorpay({
+      key_id: 'your-razorpay-key-id',  // Replace with your Razorpay Key ID
+      key_secret: 'your-razorpay-key-secret' // Replace with your Razorpay Key Secret
+    });
 
-  const subscription = await stripe.subscriptions.create({
-    customer: customer.id,
-    items: [{ price: 'your-price-id' }],
-    expand: ['latest_invoice.payment_intent'],
-  });
+    // Create a subscription
+    const subscription = await razorpay.subscriptions.create({
+      plan_id: plan_id, // Replace with your Razorpay Plan ID
+      customer_notify: 1,
+      total_count: 12, // Example: 12 billing cycles
+    });
 
-  res.json({ subscription });
+    res.json({ subscription });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Subscription creation failed' });
+  }
 });
+
+// Start the server
+app.listen(3000, () => console.log('Server running on port 3000'));
+
 const bodyParser = require('body-parser');
 
 app.use(bodyParser.json());
@@ -788,24 +800,39 @@ io.on('connection', (socket) => {
   });
 });
 
-// Stripe Payment API
-app.post('/create-subscription', async (req, res) => {
-  const { email, paymentMethodId } = req.body;
+const express = require('express');
+const Razorpay = require('razorpay');
 
-  const customer = await stripe.customers.create({
-    email,
-    payment_method: paymentMethodId,
-    invoice_settings: { default_payment_method: paymentMethodId },
-  });
+app.use(express.json()); // Middleware to parse JSON request bodies
 
-  const subscription = await stripe.subscriptions.create({
-    customer: customer.id,
-    items: [{ price: 'your-price-id' }],
-    expand: ['latest_invoice.payment_intent'],
-  });
-
-  res.json({ subscription });
+// Initialize Razorpay
+const razorpay = new Razorpay({
+  key_id: 'your-razorpay-key-id',  // Replace with your Razorpay Key ID
+  key_secret: 'your-razorpay-key-secret' // Replace with your Razorpay Key Secret
 });
+
+// Create a subscription
+app.post('/create-subscription', async (req, res) => {
+  try {
+    const { plan_id, customer_email } = req.body;  // Razorpay requires a plan_id
+
+    // Create a subscription
+    const subscription = await razorpay.subscriptions.create({
+      plan_id: plan_id, // Replace with your Razorpay Plan ID
+      customer_notify: 1,
+      total_count: 12, // Example: 12 billing cycles
+    });
+
+    res.json({ subscription });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Subscription creation failed' });
+  }
+});
+
+// Start the server
+app.listen(3000, () => console.log('Server running on port 3000'));
+
 
 // Logger with Winston
 const logger = winston.createLogger({
