@@ -3,38 +3,102 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Search</title>
-  <link rel="stylesheet" href="search.css">
+  <title>Buy Coins | Shorts App</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-  <header>
-    <div class="search-bar">
-      <input type="text" id="searchInput" placeholder="Search User..." />
-      <button id="searchButton">🔍</button>
+  <header class="header">
+    <a href="../index.html" class="back-button"><i class="fas fa-arrow-left"></i></a>
+    <div class="logo">Buy Coins</div>
+    <div class="nav-icons">
+      <i class="fas fa-history nav-icon"></i>
     </div>
   </header>
-  <main id="searchResults" class="search-results"></main>
-  <div id="loader" class="loader">Loading...</div>
-  <script src="search.js"></script>
-  <script src="Backend/routes/handler.js"></script>
-  <script src="script.js"></script>
-  <script src="Backend/middleware/auth.js"></script>
-  <script src="Backend/middleware/authmiddleware.js"></script>
-  <script src="Backend/models/post.js"></script>
-  <script src="Backend/models/user.js"></script>
-  <script src="Backend/models/video.js"></script>
-  <script src="Backend/package.json"></script>
-  <script src="Backend/recommendations.js"></script>
-  <script src="Backend/routes/auth.js"></script>
-  <script src="Backend/routes/authroute.js"></script>
-  <script src="Backend/routes/handler.js"></script>
-  <script src="Backend/routes/video.js"></script>
-  <script src="Backend/server.js"></script>
-  <script src="Backend/serviceworker.js"></script>
-  <script src="Backend/firebaseconfig.js"></script>
-  <script src="Backend/redis.js"></script>
-  <script src="Backend/security.js"></script>
-  <script src="Backend/socket.js"></script>
-  <script src="Backend/webrtc.js"></script>
+
+  <main class="main-content">
+    <div class="coins-container">
+      <h1 class="coins-title">Choose a Coin Package</h1>
+      
+      <div class="coins-grid">
+        <!-- Package 1 -->
+        <div class="coin-package">
+          <div class="coin-amount">50 Coins</div>
+          <div class="coin-price">₹10</div>
+          <div class="coin-bonus">Best for testing</div>
+        </div>
+        
+        <!-- Package 2 -->
+        <div class="coin-package">
+          <div class="coin-amount">100 Coins</div>
+          <div class="coin-price">₹20</div>
+          <div class="coin-bonus">Popular choice</div>
+        </div>
+        
+        <!-- Package 3 -->
+        <div class="coin-package">
+          <div class="coin-amount">250 Coins</div>
+          <div class="coin-price">₹50</div>
+          <div class="coin-bonus">+10% bonus</div>
+        </div>
+        
+        <!-- Package 4 -->
+        <div class="coin-package">
+          <div class="coin-amount">500 Coins</div>
+          <div class="coin-price">₹100</div>
+          <div class="coin-bonus">+20% bonus</div>
+        </div>
+        
+        <!-- Package 5 -->
+        <div class="coin-package">
+          <div class="coin-amount">1000 Coins</div>
+          <div class="coin-price">₹200</div>
+          <div class="coin-bonus">+30% bonus</div>
+        </div>
+        
+        <!-- Package 6 -->
+        <div class="coin-package">
+          <div class="coin-amount">5000 Coins</div>
+          <div class="coin-price">₹1000</div>
+          <div class="coin-bonus">+50% bonus</div>
+        </div>
+      </div>
+      
+      <div class="payment-methods">
+        <h2 class="payment-title">Payment Method</h2>
+        
+        <div class="payment-option">
+          <i class="fab fa-google-pay payment-icon"></i>
+          <div class="payment-name">Google Pay</div>
+          <i class="fas fa-check payment-selected"></i>
+        </div>
+        
+        <div class="payment-option">
+          <i class="fas fa-university payment-icon"></i>
+          <div class="payment-name">UPI</div>
+        </div>
+        
+        <div class="payment-option">
+          <i class="fas fa-credit-card payment-icon"></i>
+          <div class="payment-name">Credit/Debit Card</div>
+        </div>
+        
+        <div class="payment-option">
+          <i class="fas fa-mobile-alt payment-icon"></i>
+          <div class="payment-name">Pay with NPCI</div>
+        </div>
+      </div>
+      
+      <button class="purchase-button">Proceed to Payment</button>
+    </div>
+  </main>
+
+  <nav class="bottom-nav">
+    <a href="../index.html" class="bottom-nav-icon"><i class="fas fa-home"></i></a>
+    <a href="../discover.html" class="bottom-nav-icon"><i class="fas fa-compass"></i></a>
+    <a href="../record.html" class="bottom-nav-icon"><i class="fas fa-plus-circle"></i></a>
+    <a href="../inbox.html" class="bottom-nav-icon"><i class="fas fa-inbox"></i></a>
+    <a href="../profile/index.html" class="bottom-nav-icon"><i class="fas fa-user"></i></a>
+  </nav>
 </body>
 </html>

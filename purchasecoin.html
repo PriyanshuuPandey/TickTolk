@@ -6,34 +6,33 @@
   <title>Buy Gold-Coins</title>
   <link rel="stylesheet" href="purchasecoin.css">
 </head>
-<body>
-  <div class="purchase-container">
-    <!-- Coin Selector -->
-    <div class="coin-selector">
-      <label for="coinAmount">Select Gold Coins:</label>
-      <select id="coinAmount">
-        <option value="5">   🪙 10   Coins ( $1   )</option>
-        <option value="10">  🪙 50   Coins ( $5   )</option>
-        <option value="50">  🪙 100  Coins ( $10  )</option>
-        <option value="100"> 🪙 500  Coins ( $50  )</option>
-        <option value="500"> 🪙 1000 Coins ( $100 )</option>
-        <option value="1000">🪙 5000 Coins ( $200 )</option>
-      </select>
-    </div>
-    <!-- Payment Gateways -->
-    <div class="payment-methods">
-      <h3>Choose Payment Gateway</h3>
-      <div class="gateway-buttons">
-        <button class="gateway-btn" id="mastercard"><img src="mastercard.jpeg"></button>
-        <button class="gateway-btn" id="bharatpay"><img src="bharatpay.jpeg"></button>
-        <button class="gateway-btn" id="visa"><img src="visa.jpeg"></button>
-        <button class="gateway-btn" id="netbanking"><img src="netbanking.jpeg"></button>
-        <button class="gateway-btn" id="rupay"><img src="rupay.jpeg"></button>
-        <button class="gateway-btn" id="paytm"><img src="patym.jpeg"></button>
-        <button class="gateway-btn" id="gpay"><img src="gpay.jpeg"></button>
-      </div>
-    </div>
-  </div>
+<body>  
+            <div class="coin-pack">
+                <button onclick="buyCoins(10)">   🪙10 Coins - $1</button>
+                <button onclick="buyCoins(50)">   🪙50 Coins - $5</button>
+                <button onclick="buyCoins(100)">  🪙100 Coins - $10</button>
+                <button onclick="buyCoins(500)">  🪙500 Coins - $50</button>
+                <button onclick="buyCoins(1000)"> 🪙1000 Coins - $100</button>
+                <button onclick="buyCoins(2000)"> 🪙2000 Coins - $200</button>
+                <button onclick="buyCoins(10000)">🪙10000 Coins - $1000</button>
+            </div>
+    
+            <h2>Payment Method</h2>
+            
+            <div class="bank-details">
+                <p><strong>Bank Name:</strong> Kotak Mahindra Bank</p>
+                <p><strong>Account Name:</strong>Shalesh Pandey</p>
+                <p><strong>Account Number:</strong>631010095175</p>
+                <p><strong>IFSC Code:</strong>KKBK0004622</p>
+                <!-- <p><strong>UPI ID:</strong> </p> -->
+            </div>
+    
+            <h3>Upload Payment Screenshot</h3>
+            <input type="file" id="paymentProof">
+            <button onclick="submitPayment()">Submit Payment</button>
+    
+            <p id="status"></p>
+        </div>
   <script src="purchasecoin.js"></script>
   <script src="coin.js"></script>
   <script src="script.js"></script>
